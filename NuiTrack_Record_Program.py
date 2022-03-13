@@ -8,41 +8,9 @@ import openpyxl
 from JointData import *
 from ConcatDataFrame import *
 
-
+from FaceDetection import *
+from SkeletonDetection import *
 # for skeleton in data.skeletons
-
-
-def draw_face(image):
-    if not data_instance:
-        return
-    for instance in data_instance["Instances"]:
-        line_color = (59, 164, 225)
-        text_color = (59, 255, 255)
-        if 'face' in instance.keys():
-            bbox = instance["face"]["rectangle"]
-        else:
-            return
-        x1 = (round(bbox["left"]), round(bbox["top"]))
-        x2 = (round(bbox["left"]) + round(bbox["width"]), round(bbox["top"]))
-        x3 = (round(bbox["left"]), round(bbox["top"]) + round(bbox["height"]))
-        x4 = (round(bbox["left"]) + round(bbox["width"]), round(bbox["top"]) + round(bbox["height"]))
-        cv2.line(image, x1, x2, line_color, 3)
-        cv2.line(image, x1, x3, line_color, 3)
-        cv2.line(image, x2, x4, line_color, 3)
-        cv2.line(image, x3, x4, line_color, 3)
-        cv2.putText(image, "User {}".format(instance["id"]),
-                    x1, cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
-        cv2.putText(image, "{} {}".format(instance["face"]["gender"], int(instance["face"]["age"]["years"])),
-                    x3, cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2, cv2.LINE_AA)
-
-
-def draw_skeleton(image):
-    point_color = (59, 164, 0)
-    for skel in data.skeletons:
-        for el in skel[1:]:
-            x = (round(el.projection[0]), round(el.projection[1]))
-            cv2.circle(image, x, 8, point_color, -1)
-
 
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
@@ -82,10 +50,10 @@ while 1:
         cv2.normalize(img_depth, img_depth, 0, 255, cv2.NORM_MINMAX)
         img_depth = np.array(cv2.cvtColor(img_depth, cv2.COLOR_GRAY2RGB), dtype=np.uint8)
         img_color = nuitrack.get_color_data()
-        draw_skeleton(img_depth)
-        draw_skeleton(img_color)
-        draw_face(img_depth)
-        draw_face(img_color)
+        draw_skeleton(img_depth, data)
+        draw_skeleton(img_color, data)
+        draw_face(img_depth, data_instance)
+        draw_face(img_color, data_instance)
         if key == 32:
             mode = next(modes)
         if mode == "depth":
@@ -97,7 +65,18 @@ while 1:
     # Extracting Specific Joint Data from the SDK - Here Head - Function in JointData.py
 
     # joint = skeleton.head.projection
-    joint = 1
+    joint = pd.DataFrame(data.skeletons)
+    # print(joint)
+
+    print(data.skeletons)
+
+    joint.to_excel('JointsData.xlsx', sheet_name='Sheet1', index=False)
+    # print(joint['head'])
+
+    # joint_head = pd.DataFrame(data.skeletons[0, 1])
+    # print(joint_head)
+    # joint_head.to_excel('HeadData.xlsx', sheet_name='Sheet1', index=False)
+    # print(joint['head'])
 
     Data2 = pd.DataFrame(joint_data(data, joint))
     # Initial Data1 is null
@@ -105,16 +84,6 @@ while 1:
     # Then Iteration takes cares of the concatenation (i.e., Data1 keeps getting appended; Data2 is the latest data)
 
     # Concatenation Function Used for above-mentioned Purpose - Function in ConcatDataFrame.py
-    Index_Var = ['1', '2', '3']
-    Col_Index = pd.Index(Index_Var)
-    Data2 = Data2.set_index(Col_Index)
-
-    # print(Data2)
-
-    # print(Data2.head(1))
-    # print(Data2.iat[0, 0])
-
-    # print(Data2.iloc[1])
 
     if Data2.iat[0, 0] < 2000:
         Data1 = concat(Data1, Data2)
@@ -124,7 +93,6 @@ while 1:
     if key == 27:
         break
 
-# print(Data1)
 Data1.to_excel('Head_Data.xlsx', sheet_name='Sheet1', index=False)
 
 nuitrack.release()
