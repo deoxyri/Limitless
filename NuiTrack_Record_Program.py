@@ -10,6 +10,7 @@ from ConcatDataFrame import *
 
 from FaceDetection import *
 from SkeletonDetection import *
+
 # for skeleton in data.skeletons
 
 nuitrack = py_nuitrack.Nuitrack()
@@ -62,37 +63,37 @@ while 1:
             if img_color.size:
                 cv2.imshow('Image', img_color)
 
-    # Extracting Specific Joint Data from the SDK - Here Head - Function in JointData.py
+    # Different Joints Available
+    joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_shoulder', 'left_elbow', 'left_wrist',
+                          'left_hand', 'right_collar', 'right_shoulder',
+                          'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
+                          'right_hip', 'right_knee', 'right_ankle']
 
-    # joint = skeleton.head.projection
     joint = pd.DataFrame(data.skeletons)
-    # print(joint)
 
     print(data.skeletons)
 
     joint.to_excel('JointsData.xlsx', sheet_name='Sheet1', index=False)
-    # print(joint['head'])
 
-    # joint_head = pd.DataFrame(data.skeletons[0, 1])
-    # print(joint_head)
-    # joint_head.to_excel('HeadData.xlsx', sheet_name='Sheet1', index=False)
-    # print(joint['head'])
-
+    # Extracting Specific Joint Data from the SDK - Here Head - Function in JointData.py
     Data2 = pd.DataFrame(joint_data(data, joint))
+
     # Initial Data1 is null
     # Data1 DataFrame Updates with the First Data Point Recognised (Data2)
     # Then Iteration takes cares of the concatenation (i.e., Data1 keeps getting appended; Data2 is the latest data)
 
     # Concatenation Function Used for above-mentioned Purpose - Function in ConcatDataFrame.py
 
+    # Threshold to allow for tracking to start
     if Data2.iat[0, 0] < 2000:
         Data1 = concat(Data1, Data2)
     else:
         continue
 
+    # Break loop on 'Esc'
     if key == 27:
         break
 
-Data1.to_excel('Head_Data.xlsx', sheet_name='Sheet1', index=False)
+Data1.to_excel('{}_Data.xlsx'.format(joints_description[0]), sheet_name='Sheet1', index=False)
 
 nuitrack.release()
