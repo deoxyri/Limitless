@@ -11,6 +11,8 @@ from ConcatDataFrame import *
 from FaceDetection import *
 from SkeletonDetection import *
 
+import xlsxwriter
+
 # for skeleton in data.skeletons
 
 nuitrack = py_nuitrack.Nuitrack()
@@ -96,6 +98,23 @@ while 1:
     if key == 27:
         break
 
-Data1.to_excel('{}_Data.xlsx'.format(joints_description[0]), sheet_name='Sheet1', index=False)
+wb = xlsxwriter.Workbook('X:\Limitless\A - Skeletal Tracking\Tracking Programs\Joints_Data.xlsx') # .format(joints_description[0])')
+worksheet = wb.add_worksheet("Data Sheet")
+# Start from the first cell. Rows and
+# columns are zero indexed.
+row = 0
+column = 0
+
+# iterating through content list
+for item in Data1:
+    # write operation perform
+    worksheet.write(row, column, item)
+
+    # incrementing the value of row by one
+    # with each iteration
+    row += 1
+
+wb.close()
+# Data1.to_excel('{}_Data.xlsx'.format(joints_description[0]), sheet_name='Sheet1', index=False)
 
 nuitrack.release()
