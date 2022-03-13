@@ -71,6 +71,8 @@ while 1:
 
     joint = pd.DataFrame(data.skeletons)
 
+    # joint = skeleton.head.projection
+
     print(data.skeletons)
 
     joint.to_excel('JointsData.xlsx', sheet_name='Sheet1', index=False)
