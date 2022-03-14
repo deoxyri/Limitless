@@ -1,15 +1,9 @@
-class JOINTS:
+def joint_data(data):
 
-    def __init__(self, data, joints_description):
-        self.data = data
-        self.joints_description = joints_description
+    import pandas as pd
 
+    for skeleton in data.skeletons:
 
-    def joint_data(self): # , data, joints_description):
+        data = pd.DataFrame(skeleton.head.projection)
 
-     import pandas as pd
-
-     for skeleton in self.data.skeletons:
-         data = pd.DataFrame(skeleton.head.projection)
-
-     return data
+    return data
