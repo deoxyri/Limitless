@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/py_nuitrack_windows_python3.7-0.0.1-py3-none-any.whl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Tracking Programs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tracking Programs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Head_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Head_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JointData.py" beforeDir="false" afterPath="$PROJECT_DIR$/JointData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NuiTrack_Record_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Record_Program.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SkeletonDetection_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SkeletonDetection_Test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
