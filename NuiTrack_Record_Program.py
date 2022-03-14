@@ -71,16 +71,9 @@ while 1:
                           'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
                           'right_hip', 'right_knee', 'right_ankle']
 
-    joint = pd.DataFrame(data.skeletons)
-
-    # joint = skeleton.head.projection
-
-    print(data.skeletons)
-
-    joint.to_excel('JointsData.xlsx', sheet_name='Sheet1', index=False)
-
     # Extracting Specific Joint Data from the SDK - Here Head - Function in JointData.py
-    Data2 = pd.DataFrame(joint_data(data, joint))
+    Data2 = JOINTS(data, joints_description)
+    Data2 = pd.DataFrame(Data2.joint_data())
 
     # Initial Data1 is null
     # Data1 DataFrame Updates with the First Data Point Recognised (Data2)
@@ -98,23 +91,6 @@ while 1:
     if key == 27:
         break
 
-wb = xlsxwriter.Workbook('X:\Limitless\A - Skeletal Tracking\Tracking Programs\Joints_Data.xlsx') # .format(joints_description[0])')
-worksheet = wb.add_worksheet("Data Sheet")
-# Start from the first cell. Rows and
-# columns are zero indexed.
-row = 0
-column = 0
-
-# iterating through content list
-for item in Data1:
-    # write operation perform
-    worksheet.write(row, column, item)
-
-    # incrementing the value of row by one
-    # with each iteration
-    row += 1
-
-wb.close()
-# Data1.to_excel('{}_Data.xlsx'.format(joints_description[0]), sheet_name='Sheet1', index=False)
+Data1.to_excel('{}_Data.xlsx'.format(joints_description[0]), sheet_name='Sheet1', index=False)
 
 nuitrack.release()
