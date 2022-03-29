@@ -3,20 +3,24 @@ import cv2
 from itertools import cycle
 import numpy as np
 import pandas as pd
-import openpyxl
-from JointsAttributesClass import *
+# import openpyxl
+# from JointsAttributesClass import *
 from JointData import *
-from ConcatDataFrame import *
+# from ConcatDataFrame import *
 
 from FaceDetection import *
 from SkeletonDetection_Test import *
 from SkeletonDetection import *
 
-df = pd.read_excel(r'X:\Limitless\A - Skeletal Tracking\Tracking Programs\head_Data.xlsx')
-print(df[0][0])
-print(df[0][0] + 10)
-df_size = df.size
-print(df_size)
+joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_shoulder', 'left_elbow', 'left_wrist',
+                      'left_hand', 'right_collar', 'right_shoulder',
+                      'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
+                      'right_hip', 'right_knee', 'right_ankle']
+
+head_df = pd.read_excel(
+    'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[0]))
+left_elbow_df = pd.read_excel(
+    'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[6]))
 
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
@@ -43,9 +47,9 @@ modes = cycle(["depth", "color"])
 mode = next(modes)
 
 # Start Comparison
-mmm = 0
+counter = 0  # COMPARISON TO BE CODED
 
-while 1:
+while counter >= 0:
     # while mmm <= df_size: # Something Wrong
 
     key = cv2.waitKey(1)
@@ -53,8 +57,12 @@ while 1:
 
     data = nuitrack.get_skeleton()
 
-    data2 = pd.DataFrame(joint_data(data))
-    # print(Data2[0][0])
+    for skeleton in data.skeletons:
+        # Need to write a loop for the Object(skeleton) Attributes(.head, .neck, ....)
+        head_joint_data = pd.DataFrame(skeleton.head.projection)
+        left_elbow_joint_data = pd.DataFrame(skeleton.left_elbow.projection)
+
+    data_head_live = pd.DataFrame(joint_data(data))
 
     data_instance = nuitrack.get_instance()
     img_depth = nuitrack.get_depth_data()
@@ -69,8 +77,8 @@ while 1:
         draw_skeleton(img_color, data)
 
         # Compare Recorded Data with Live for Dot Color
-        draw_skeleton_test(img_depth, data, df, data2, mmm)
-        draw_skeleton_test(img_color, data, df, data2, mmm)
+        draw_skeleton_test(img_depth, data, head_df, data_head_live, counter)
+        draw_skeleton_test(img_color, data, head_df, data_head_live, counter)
 
         # Draw Face
         draw_face(img_depth, data_instance)
@@ -84,7 +92,7 @@ while 1:
             if img_color.size:
                 cv2.imshow('Image', img_color)
 
-    # mmm += 1 # Something Wrong
+    # counter += 1 # FIGURE OUT LOOP
 
     # Break loop on 'Esc'
     if key == 27:

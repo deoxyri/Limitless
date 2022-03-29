@@ -5,16 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Tracking Programs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tracking Programs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ObjectAttributes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_file.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_write_program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Head_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Head_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JointData.py" beforeDir="false" afterPath="$PROJECT_DIR$/JointData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NuiTrack_Record_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Record_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkeletonDetection_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SkeletonDetection_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_ankle_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_ankle_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_collar_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_collar_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_elbow_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_elbow_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_hand_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hand_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_hip_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hip_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_knee_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_knee_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_shoulder_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_shoulder_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/left_wrist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_wrist_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/neck_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/neck_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_ankle_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_ankle_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_collar_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_collar_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_elbow_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_elbow_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_hand_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hand_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_hip_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hip_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_knee_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_knee_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_shoulder_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_shoulder_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/right_wrist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_wrist_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torso_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/torso_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/waist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/waist_Data.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,17 +54,41 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="26Nce6NiY9eikVorYI8GxYsHzCx" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ObjectAttributes">
+    <configuration name="NuiTrack_Record_Program" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Tracking Programs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NuiTrack_Record_Program.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="NuiTrack_Testing_Program" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Tracking Programs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -55,8 +110,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="ObjectAttributes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Tracking Programs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ObjectAttributes.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ObjectAttributes" />
+        <item itemvalue="Python.NuiTrack_Record_Program" />
         <item itemvalue="Python.NuiTrack_Testing_Program" />
       </list>
     </recent_temporary>
@@ -82,5 +160,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
