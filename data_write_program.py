@@ -1,6 +1,10 @@
 def data_write_program(data_zero, data):
     # from ConcatDataFrame import *
 
+    import pandas as pd
+    data = pd.DataFrame(data)
+    data_zero = pd.DataFrame(data_zero)
+
     if data.iat[0, 0] < 2000:
         # Concatenation Function Used for above-mentioned Purpose - Function in ConcatDataFrame.py
         data_zero = concat(data_zero, data)

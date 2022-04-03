@@ -114,7 +114,7 @@ while 1:
         data_right_ankle = pd.DataFrame(skeleton.right_ankle.projection)
 
         # print(data_head)
-        data_head_df = data_write_program(data_head_df, data_head)
+        # data_head_df = data_write_program(data_head_df, data_head)
         data_head_df = data_write_program(data_head_df, data_head)
         data_neck_df = data_write_program(data_neck_df, data_neck)
         data_torso_df = data_write_program(data_torso_df, data_torso)

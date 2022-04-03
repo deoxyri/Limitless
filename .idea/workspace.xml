@@ -5,16 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ObjectAttributes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_file.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_write_program.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConcatTestProgram.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VariableVariables.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/head_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_ankle_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_collar_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_elbow_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_hand_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_hip_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_knee_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_shoulder_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/left_wrist_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neck_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_ankle_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_collar_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_elbow_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_hand_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_hip_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_knee_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_shoulder_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/right_wrist_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/torso_Data_Variable.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/waist_Data_Variable.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Head_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Head_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JointData.py" beforeDir="false" afterPath="$PROJECT_DIR$/JointData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JointsAttributesClass.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/NuiTrack_Record_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Record_Program.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SkeletonDetection_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SkeletonDetection_Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ObjectAttributes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_write_program.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_write_program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/left_ankle_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_ankle_Data.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/left_collar_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_collar_Data.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/left_elbow_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_elbow_Data.xlsx" afterDir="false" />
@@ -67,7 +85,28 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.ObjectAttributes">
+  <component name="RunManager" selected="Python.VariableVariables">
+    <configuration name="ConcatTestProgram" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Tracking Programs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ConcatTestProgram.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="NuiTrack_Record_Program" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Tracking Programs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,10 +170,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="VariableVariables" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Tracking Programs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VariableVariables.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ObjectAttributes" />
+        <item itemvalue="Python.VariableVariables" />
+        <item itemvalue="Python.ConcatTestProgram" />
         <item itemvalue="Python.NuiTrack_Record_Program" />
+        <item itemvalue="Python.ObjectAttributes" />
         <item itemvalue="Python.NuiTrack_Testing_Program" />
       </list>
     </recent_temporary>
