@@ -20,6 +20,7 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
                       'right_hip', 'right_knee', 'right_ankle']
 # LIVE DATA HOLDER
 # var_holder = {}
+data_tracking = {}
 
 # RECORDED DATA
 var_joints_recorded_data = {}
@@ -30,7 +31,7 @@ while i < len(joints_description):
         'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data_Variable.xlsx'.format(joints_description[i]))
     i += 1
 
-print(var_joints_recorded_data['head_df'])
+# print(var_joints_recorded_data['head_df'])
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
@@ -43,7 +44,7 @@ devices = nuitrack.get_device_list()
 
 # DEVICE NAME, ID etc...
 for i, dev in enumerate(devices):
-    print(dev.get_name(), dev.get_serial_number())
+    # print(dev.get_name(), dev.get_serial_number())
     if i == 0:
         # dev.activate("ACTIVATION_KEY") # you can activate device using python api
         # print(dev.get_activation())
@@ -70,12 +71,15 @@ while counter >= 0:
     var_joints_live_data = var_holder_return_function(data, joints_description)
     keys = list(var_joints_live_data)
 
-    print(var_joints_live_data)
+    # print(var_joints_live_data)
 
-    # i = 0
-    # while i < len(keys):
-    #    print(var_joints_live_data['data_'+joints_description[i]])
-    #    i += 1
+    i = 0
+    while i < len(keys):
+        data_tracking['{}'.format(i)] = var_joints_live_data['data_'+joints_description[i]]
+        # print(var_joints_live_data['data_'+joints_description[i]])
+        i += 1
+
+    # print(data_tracking)
 
     # DRAWING LOOP
     if img_depth.size:
@@ -87,8 +91,11 @@ while counter >= 0:
         draw_skeleton(img_depth, data)
         draw_skeleton(img_color, data)
 
-        # Compare Recorded Data with Live for Dot Color
+        # print(data_tracking)
+
+        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) ########
         # draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data)
+        draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking)
 
         # Draw Face
         draw_face(img_depth, data_instance)

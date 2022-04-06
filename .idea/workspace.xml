@@ -5,33 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/var_holder_return_function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Class Help Data Sheet.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ConcatTestProgram.py" beforeDir="false" afterPath="$PROJECT_DIR$/ConcatTestProgram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NuiTrack_Record_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Record_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkeletonDetection_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SkeletonDetection_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/head_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/head_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_ankle_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_ankle_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_collar_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_collar_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_elbow_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_elbow_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_hand_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hand_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_hip_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hip_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_knee_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_knee_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_shoulder_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_shoulder_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_wrist_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_wrist_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neck_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/neck_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_ankle_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_ankle_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_collar_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_collar_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_elbow_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_elbow_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_hand_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hand_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_hip_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hip_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_knee_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_knee_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_shoulder_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_shoulder_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_wrist_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_wrist_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torso_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/torso_Data_Variable.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/waist_Data_Variable.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/waist_Data_Variable.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +50,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.NuiTrack_Testing_Program">
+  <component name="RunManager" selected="Python.NuiTrack_Record_Program">
     <configuration name="ConcatTestProgram" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Tracking Programs" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,9 +158,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.NuiTrack_Record_Program" />
         <item itemvalue="Python.NuiTrack_Testing_Program" />
         <item itemvalue="Python.ConcatTestProgram" />
-        <item itemvalue="Python.NuiTrack_Record_Program" />
         <item itemvalue="Python.VariableVariables" />
         <item itemvalue="Python.ObjectAttributes" />
       </list>
