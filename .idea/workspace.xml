@@ -5,31 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/red_dot_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Head_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Head_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NuiTrack_Record_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Record_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SkeletonDetection_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/SkeletonDetection_Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_ankle_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_ankle_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_collar_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_collar_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_elbow_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_elbow_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_hand_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hand_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_hip_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_hip_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_knee_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_knee_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_shoulder_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_shoulder_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/left_wrist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/left_wrist_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/neck_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/neck_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_ankle_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_ankle_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_collar_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_collar_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_elbow_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_elbow_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_hand_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hand_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_hip_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_hip_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_knee_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_knee_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_shoulder_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_shoulder_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/right_wrist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/right_wrist_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torso_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/torso_Data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/waist_Data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/waist_Data.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/red_dot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/red_dot_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
