@@ -28,7 +28,7 @@ var_joints_recorded_data = {}
 i = 0
 while i < len(joints_description):
     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
-        'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data_Variable.xlsx'.format(joints_description[i]))
+        'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
     i += 1
 
 # print(var_joints_recorded_data['head_df'])
@@ -95,7 +95,8 @@ while counter >= 0:
 
         # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) ########
         # draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data)
-        draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking)
+
+        draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
 
         # Draw Face
         draw_face(img_depth, data_instance)

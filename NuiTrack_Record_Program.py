@@ -128,7 +128,7 @@ print(var_joint_data_holder)
 j = 0
 while j < len(var_joint_data_holder):
     var_joint_data_holder['data_' + joints_description[j] + '_df'].to_excel(
-        '{}_Data_Variable.xlsx'.format(joints_description[j]),
+        '{}_Data.xlsx'.format(joints_description[j]),
         sheet_name='Sheet1', index=False)
     j += 1
 # -----------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data):
+def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data, counter):
     import cv2
     import numpy as np
 
@@ -42,7 +42,6 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     #    i += 1
 
     data_size = head_data_recorded.size / 3
-    counter = 0
 
     # ACTUAL LOOP TO BE CONFIGURED
 
