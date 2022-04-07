@@ -15,14 +15,80 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
 
     ## FINISH LOOP AND PHASE1 DONE ##
 
-    joints = 0
+    # joints = 0
     # while joints < len(joints_description):
     # RECORDED DATA
-    data_recorded = pd.DataFrame(var_joints_recorded_data[joints_description[joints] + '_df'])
+    # data_recorded = data_recorded_head = pd.DataFrame(var_joints_recorded_data[joints_description[joints] + '_df'])
     # LIVE DATA
-    data_live = np.array(var_joints_live_data.get(joints_description[joints]))
+    # data_live = data_live_head = np.array(var_joints_live_data.get(joints_description[joints]))
+
+    ## -------------------------------------------- ##
+    # RECORDED DATA
+    data_recorded_head = pd.DataFrame(var_joints_recorded_data['head_df'])
+    data_recorded_neck = pd.DataFrame(var_joints_recorded_data['neck_df'])
+    data_recorded_torso = pd.DataFrame(var_joints_recorded_data['torso_df'])
+    data_recorded_waist = pd.DataFrame(var_joints_recorded_data['waist_df'])
+    data_recorded_left_collar = pd.DataFrame(var_joints_recorded_data['left_collar_df'])
+    data_recorded_left_shoulder = pd.DataFrame(var_joints_recorded_data['left_shoulder_df'])
+    data_recorded_left_elbow = pd.DataFrame(var_joints_recorded_data['left_elbow_df'])
+    data_recorded_left_wrist = pd.DataFrame(var_joints_recorded_data['left_wrist_df'])
+    data_recorded_left_hand = pd.DataFrame(var_joints_recorded_data['left_hand_df'])
+    data_recorded_right_collar = pd.DataFrame(var_joints_recorded_data['right_collar_df'])
+    data_recorded_right_shoulder = pd.DataFrame(var_joints_recorded_data['right_shoulder_df'])
+    data_recorded_right_elbow = pd.DataFrame(var_joints_recorded_data['right_elbow_df'])
+    data_recorded_right_wrist = pd.DataFrame(var_joints_recorded_data['right_wrist_df'])
+    data_recorded_right_hand = pd.DataFrame(var_joints_recorded_data['right_hand_df'])
+    data_recorded_left_hip = pd.DataFrame(var_joints_recorded_data['left_hip_df'])
+    data_recorded_left_knee = pd.DataFrame(var_joints_recorded_data['left_knee_df'])
+    data_recorded_left_ankle = pd.DataFrame(var_joints_recorded_data['left_ankle_df'])
+    data_recorded_right_hip = pd.DataFrame(var_joints_recorded_data['right_hip_df'])
+    data_recorded_right_knee = pd.DataFrame(var_joints_recorded_data['right_knee_df'])
+    data_recorded_right_ankle = pd.DataFrame(var_joints_recorded_data['right_ankle_df'])
+
+    # LIVE DATA
+    data_live_head = np.array(var_joints_live_data.get('head'))
+    data_live_neck = np.array(var_joints_live_data.get('neck'))
+    data_live_torso = np.array(var_joints_live_data.get('torso'))
+    data_live_waist = np.array(var_joints_live_data.get('waist'))
+    data_live_left_collar = np.array(var_joints_live_data.get('left_collar'))
+    data_live_left_shoulder = np.array(var_joints_live_data.get('left_shoulder'))
+    data_live_left_elbow = np.array(var_joints_live_data.get('left_elbow'))
+    data_live_left_wrist = np.array(var_joints_live_data.get('left_wrist'))
+    data_live_left_hand = np.array(var_joints_live_data.get('left_hand'))
+    data_live_right_collar = np.array(var_joints_live_data.get('right_collar'))
+    data_live_right_shoulder = np.array(var_joints_live_data.get('right_shoulder'))
+    data_live_right_elbow = np.array(var_joints_live_data.get('right_elbow'))
+    data_live_right_wrist = np.array(var_joints_live_data.get('right_wrist'))
+    data_live_right_hand = np.array(var_joints_live_data.get('right_hand'))
+    data_live_left_hip = np.array(var_joints_live_data.get('left_hip'))
+    data_live_left_knee = np.array(var_joints_live_data.get('left_knee'))
+    data_live_left_ankle = np.array(var_joints_live_data.get('left_ankle'))
+    data_live_right_hip = np.array(var_joints_live_data.get('right_hip'))
+    data_live_right_knee = np.array(var_joints_live_data.get('right_knee'))
+    data_live_right_ankle = np.array(var_joints_live_data.get('right_ankle'))
+
     # RED DOT LOOP
-    deviation_check_loop(img_color, counter, data_recorded, data_live)
+    deviation_check_loop(img_color, counter, data_recorded_head, data_live_head)
+    deviation_check_loop(img_color, counter, data_recorded_neck, data_live_neck)
+    deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
+    deviation_check_loop(img_color, counter, data_recorded_waist, data_live_waist)
+    deviation_check_loop(img_color, counter, data_recorded_left_collar, data_live_left_collar)
+    deviation_check_loop(img_color, counter, data_recorded_left_shoulder, data_live_left_shoulder)
+    deviation_check_loop(img_color, counter, data_recorded_left_elbow, data_live_left_elbow)
+    deviation_check_loop(img_color, counter, data_recorded_left_wrist, data_live_left_wrist)
+    deviation_check_loop(img_color, counter, data_recorded_left_hand, data_live_left_hand)
+    deviation_check_loop(img_color, counter, data_recorded_right_collar, data_live_right_collar)
+    deviation_check_loop(img_color, counter, data_recorded_right_shoulder, data_live_right_shoulder)
+    deviation_check_loop(img_color, counter, data_recorded_right_elbow, data_live_right_elbow)
+    deviation_check_loop(img_color, counter, data_recorded_right_wrist, data_live_right_wrist)
+    deviation_check_loop(img_color, counter, data_recorded_right_hand, data_live_right_hand)
+    deviation_check_loop(img_color, counter, data_recorded_left_hip, data_live_left_hip)
+    deviation_check_loop(img_color, counter, data_recorded_left_knee, data_live_left_knee)
+    deviation_check_loop(img_color, counter, data_recorded_left_ankle, data_live_left_ankle)
+    deviation_check_loop(img_color, counter, data_recorded_right_hip, data_live_right_hip)
+    deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
+    deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
+
     # joints += 1
 
 
