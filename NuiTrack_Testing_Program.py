@@ -8,7 +8,8 @@ from operator import attrgetter
 
 # DRAWING POINTS
 from FaceDetection import *
-from SkeletonDetection_Test import *
+# from SkeletonDetection_Test import *
+from red_dot_test import *
 from SkeletonDetection import *
 
 # FUNCTION TEST
@@ -19,7 +20,6 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
                       'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
                       'right_hip', 'right_knee', 'right_ankle']
 # LIVE DATA HOLDER
-# var_holder = {}
 data_tracking = {}
 
 # RECORDED DATA
@@ -31,33 +31,18 @@ while i < len(joints_description):
         'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
     i += 1
 
-# print(var_joints_recorded_data['head_df'])
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
-
-# ---enable if you want to use face tracking---
-# nuitrack.set_config_value("Faces.ToUse", "true")
-# nuitrack.set_config_value("DepthProvider.Depth2ColorRegistration", "true")
-
 devices = nuitrack.get_device_list()
 
 # DEVICE NAME, ID etc...
 for i, dev in enumerate(devices):
-    # print(dev.get_name(), dev.get_serial_number())
     if i == 0:
-        # dev.activate("ACTIVATION_KEY") # you can activate device using python api
-        # print(dev.get_activation())
         nuitrack.set_device(dev)
-
-# print(nuitrack.get_version())
-# print(nuitrack.get_license())
 
 nuitrack.create_modules()
 nuitrack.run()
-
-modes = cycle(["depth", "color"])
-mode = next(modes)
 
 # START COMPARISON
 counter = 0
@@ -71,15 +56,11 @@ while counter >= 0:
     var_joints_live_data = var_holder_return_function(data, joints_description)
     keys = list(var_joints_live_data)
 
-    # print(var_joints_live_data)
-
     i = 0
     while i < len(keys):
         data_tracking['{}'.format(i)] = var_joints_live_data['data_'+joints_description[i]]
         # print(var_joints_live_data['data_'+joints_description[i]])
         i += 1
-
-    # print(data_tracking)
 
     # DRAWING LOOP
     if img_depth.size:
@@ -91,29 +72,19 @@ while counter >= 0:
         draw_skeleton(img_depth, data)
         draw_skeleton(img_color, data)
 
-        # print(data_tracking)
-
-        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) ########
-        # draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data)
-
+        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR)
         draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
 
         # Draw Face
         draw_face(img_depth, data_instance)
         draw_face(img_color, data_instance)
 
-        if key == 32:
-            mode = next(modes)
-        if mode == "depth":
-            cv2.imshow('Image', img_depth)
-        if mode == "color":
-            if img_color.size:
-                cv2.imshow('Image', img_color)
+        cv2.imshow('Image', img_color)
+
+    # counter += 1
 
     # Break loop on 'Esc'
     if key == 27:
         break
-
-# print(var_holder['data_head'])
 
 nuitrack.release()

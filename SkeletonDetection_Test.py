@@ -10,7 +10,6 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
                           'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
                           'right_hip', 'right_knee', 'right_ankle']
 
-    # head_data_recorded = var_joints_recorded_data['head_df']
     head_data_recorded = var_joints_recorded_data['head_df']
 
     # VARIABLES
@@ -87,4 +86,4 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
         else:
             break
 
-    counter += 1
+    # counter += 1

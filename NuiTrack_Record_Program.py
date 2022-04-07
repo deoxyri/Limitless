@@ -121,8 +121,8 @@ while 1:
     if key == 27:
         break
 
-print(var_holder)
-print(var_joint_data_holder)
+# print(var_holder)
+# print(var_joint_data_holder)
 
 # WRITING DATA TO EXCEL FILES FOR RECORDED DATA
 j = 0
