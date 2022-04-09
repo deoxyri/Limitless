@@ -4,13 +4,9 @@ from itertools import cycle
 import numpy as np
 import pandas as pd
 
-from operator import attrgetter
-
 # DRAWING POINTS
-from FaceDetection import *
 from SkeletonDetection_Test import *
 # from red_dot_test import *
-from SkeletonDetection import *
 
 # FUNCTION TEST
 from var_holder_return_function import *
@@ -20,7 +16,6 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
                       'right_elbow', 'right_wrist', 'right_hand', 'left_hip', 'left_knee', 'left_ankle',
                       'right_hip', 'right_knee', 'right_ankle']
 # LIVE DATA HOLDER
-# var_holder = {}
 data_tracking = {}
 
 # RECORDED DATA
@@ -60,36 +55,21 @@ while counter >= 0:
     var_joints_live_data = var_holder_return_function(data, joints_description)
     keys = list(var_joints_live_data)
 
-    # print(var_joints_live_data)
-
     i = 0
     while i < len(keys):
-        data_tracking['{}'.format(joints_description[i])] = var_joints_live_data['data_'+joints_description[i]]
-        # print(var_joints_live_data['data_'+joints_description[i]])
+        data_tracking['{}'.format(joints_description[i])] = var_joints_live_data['data_' + joints_description[i]]
         i += 1
 
-    # print(data_tracking)
-
     # DRAWING LOOP
+
     if img_depth.size:
         cv2.normalize(img_depth, img_depth, 0, 255, cv2.NORM_MINMAX)
         img_depth = np.array(cv2.cvtColor(img_depth, cv2.COLOR_GRAY2RGB), dtype=np.uint8)
         img_color = nuitrack.get_color_data()
 
-        # Actual Drawing
-        draw_skeleton(img_depth, data)
-        draw_skeleton(img_color, data)
-
-        # print(data_tracking)
-
-        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) ########
-        # draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data)
+        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
 
         draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
-
-        # Draw Face
-        draw_face(img_depth, data_instance)
-        draw_face(img_color, data_instance)
 
         if key == 32:
             mode = next(modes)
@@ -104,8 +84,5 @@ while counter >= 0:
     # Break loop on 'Esc'
     if key == 27:
         break
-
-
-# print(var_holder['data_head'])
 
 nuitrack.release()

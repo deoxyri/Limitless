@@ -4,6 +4,7 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     import pandas as pd
 
     img_color = img_color
+    img_color_2 = img_color
 
     point_color = (59, 164, 0)  # GREEN
     point_color_2 = (26, 26, 139)  # RED
@@ -14,14 +15,6 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
                           'right_hip', 'right_knee', 'right_ankle']
 
     ## FINISH LOOP AND PHASE1 DONE ##
-
-    # joints = 0
-    # while joints < len(joints_description):
-    # RECORDED DATA
-    # data_recorded = data_recorded_head = pd.DataFrame(var_joints_recorded_data[joints_description[joints] + '_df'])
-    # LIVE DATA
-    # data_live = data_live_head = np.array(var_joints_live_data.get(joints_description[joints]))
-
     ## -------------------------------------------- ##
     # RECORDED DATA
     data_recorded_head = pd.DataFrame(var_joints_recorded_data['head_df'])
@@ -67,7 +60,7 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     data_live_right_knee = np.array(var_joints_live_data.get('right_knee'))
     data_live_right_ankle = np.array(var_joints_live_data.get('right_ankle'))
 
-    # RED DOT LOOP
+    # RED DOT FUNCTION CALL
     deviation_check_loop(img_color, counter, data_recorded_head, data_live_head)
     deviation_check_loop(img_color, counter, data_recorded_neck, data_live_neck)
     deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
@@ -89,8 +82,6 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
     deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
 
-    # joints += 1
-
 
 def deviation_check_loop(img_color, counter, data_recorded, data_live):
     import cv2
@@ -100,18 +91,16 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
     data_size = data_recorded.size / 3
     # HEAD LOOP
     if counter < data_size and data_live.size > 1:
-        print("Counter Value = ", counter)
-        # print(head_data_recorded[0][counter])
+        # print("Counter Value = ", counter)
 
         if data_live[0] > data_recorded.iat[0, counter] + 20 or \
                 data_live[0] < data_recorded.iat[0, counter] - 20:
 
             x = (round(data_live[0]), round(data_live[1]))
-            cv2.circle(img_color, x, 8, point_color_2, -1)
-            # break
+            cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
 
         elif data_recorded.iat[0, counter] + 20 >= data_live[0] >= \
                 data_recorded.iat[0, counter] - 20:
 
             x = (round(data_live[0]), round(data_live[1]))
-            cv2.circle(img_color, x, 8, point_color, -1)
+            cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)

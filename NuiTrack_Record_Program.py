@@ -87,14 +87,16 @@ while 1:
         draw_face(img_depth, data_instance)
         draw_face(img_color, data_instance)
 
-        if key == 32:
-            mode = next(modes)
-        if mode == "depth":
-            cv2.imshow('Image', img_depth)
+        # if key == 32:
+        #     mode = next(modes)
+        # if mode == "depth":
+        #     cv2.imshow('Image', img_depth)
+        #
+        # if mode == "color":
+        #     if img_color.size:
+        #         cv2.imshow('Image', img_color)
 
-        if mode == "color":
-            if img_color.size:
-                cv2.imshow('Image', img_color)
+        cv2.imshow('Image', img_color)
 
         # LOOP FOR WRITING DATA
 
