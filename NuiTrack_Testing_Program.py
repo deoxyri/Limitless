@@ -22,9 +22,14 @@ data_tracking = {}
 var_joints_recorded_data = {}
 
 i = 0
+# while i < len(joints_description):
+#     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
+#         'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
+#     i += 1
+
 while i < len(joints_description):
     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
-        'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
+        'F:\Limitless\Programs\Limitless\{}_Data.xlsx'.format(joints_description[i]))
     i += 1
 
 # INITIALISE DEVICE
