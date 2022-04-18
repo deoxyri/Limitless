@@ -61,23 +61,12 @@ while counter >= 0:
         i += 1
 
     # DRAWING LOOP
+    img_color = nuitrack.get_color_data()
 
-    if img_depth.size:
-        cv2.normalize(img_depth, img_depth, 0, 255, cv2.NORM_MINMAX)
-        img_depth = np.array(cv2.cvtColor(img_depth, cv2.COLOR_GRAY2RGB), dtype=np.uint8)
-        img_color = nuitrack.get_color_data()
+    # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
+    draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
 
-        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
-
-        draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
-
-        if key == 32:
-            mode = next(modes)
-        if mode == "depth":
-            cv2.imshow('Image', img_depth)
-        if mode == "color":
-            if img_color.size:
-                cv2.imshow('Image', img_color)
+    cv2.imshow('Image', img_color)
 
     counter += 1
 
