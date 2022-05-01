@@ -4,10 +4,10 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     import pandas as pd
 
     img_color = img_color
-    img_color_2 = img_color
+    # img_color_2 = img_color
 
-    point_color = (59, 164, 0)  # GREEN
-    point_color_2 = (26, 26, 139)  # RED
+    # point_color = (59, 164, 0)  # GREEN
+    # point_color_2 = (26, 26, 139)  # RED
 
     joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_shoulder', 'left_elbow', 'left_wrist',
                           'left_hand', 'right_collar', 'right_shoulder',
@@ -82,16 +82,13 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
     deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
 
-    return img_color
+    # cv2.imshow('Image', img_color)
 
 
 def deviation_check_loop(img_color, counter, data_recorded, data_live):
     import cv2
     point_color = (59, 164, 0)  # GREEN
     point_color_2 = (26, 26, 139)  # RED
-
-    img_color = img_color
-    img_color_2 = img_color
 
     data_size = data_recorded.size / 3
     # HEAD LOOP
@@ -101,23 +98,11 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
         if data_live[0] > data_recorded.iat[0, counter] + 20 or \
                 data_live[0] < data_recorded.iat[0, counter] - 20:
 
-            alpha = 0.4  # TRANSPARENCY FACTOR
-
             x = (round(data_live[0]), round(data_live[1]))
-            cv2.circle(img_color_2, x, 8, point_color_2, -1)
-
-            img_color = cv2.addWeighted(img_color, alpha, img_color_2, 1 - alpha, 0)
-
-            return img_color
+            cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
 
         elif data_recorded.iat[0, counter] + 20 >= data_live[0] >= \
                 data_recorded.iat[0, counter] - 20:
 
-            alpha = 0.4  # TRANSPARENCY FACTOR
-
             x = (round(data_live[0]), round(data_live[1]))
-            cv2.circle(img_color_2, x, 8, point_color, -1)
-
-            img_color = cv2.addWeighted(img_color, alpha, img_color_2, 1 - alpha, 0)
-
-            return img_color
+            cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)
