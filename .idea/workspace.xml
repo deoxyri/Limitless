@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20ec5107-e336-4849-bd51-843eea1f85b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Tracking Programs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tracking Programs.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" beforeDir="false" afterPath="$PROJECT_DIR$/NuiTrack_Testing_Program.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
