@@ -22,9 +22,14 @@ data_tracking = {}
 var_joints_recorded_data = {}
 
 i = 0
+# while i < len(joints_description):
+#     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
+#         'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
+#     i += 1
+
 while i < len(joints_description):
     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
-        'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
+        'F:\Limitless\Programs\Limitless\{}_Data.xlsx'.format(joints_description[i]))
     i += 1
 
 # INITIALISE DEVICE
@@ -62,11 +67,11 @@ while counter >= 0:
 
     # DRAWING LOOP
     img_color = nuitrack.get_color_data()
+    if img_color.size:
+        # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
+        draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
 
-    # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
-    draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
-
-    cv2.imshow('Image', img_color)
+        cv2.imshow('Image', img_color)
 
     counter += 1
 
