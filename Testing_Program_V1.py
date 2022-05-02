@@ -6,7 +6,9 @@ import pandas as pd
 
 # DRAWING POINTS
 # from SkeletonDetection_Test import *
-from red_dot_test import *
+# from red_dot_test import *
+from red_dot_pause_test_function import *
+
 
 # FUNCTION TEST
 from var_holder_return_function import *
