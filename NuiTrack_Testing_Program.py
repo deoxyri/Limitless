@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 
 # DRAWING POINTS
-# from SkeletonDetection_Test import *
-from red_dot_test import *
+from SkeletonDetection_Test import *
+# from red_dot_test import *
 
 # FUNCTION TEST
 from var_holder_return_function import *
@@ -22,15 +22,15 @@ data_tracking = {}
 var_joints_recorded_data = {}
 
 i = 0
-# while i < len(joints_description):
-#     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
-#         'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
-#     i += 1
-
 while i < len(joints_description):
     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
-        'F:\Limitless\Programs\Limitless\{}_Data.xlsx'.format(joints_description[i]))
+        'X:\Limitless\A - Skeletal Tracking\Tracking Programs\{}_Data.xlsx'.format(joints_description[i]))
     i += 1
+
+# while i < len(joints_description):
+#     var_joints_recorded_data[joints_description[i] + '_df'] = pd.read_excel(
+#         'F:\Limitless\Programs\Limitless\{}_Data.xlsx'.format(joints_description[i]))
+#     i += 1
 
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()

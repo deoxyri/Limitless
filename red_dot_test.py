@@ -100,9 +100,20 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
+            cv2.putText(img_color, "PLEASE CORRECT YOUR POSTURE", (50, 50),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
+            # DRAW ARROW
+            start_point = x  # Live Data Point
+            end_point = (round(data_recorded.iat[0, counter]), round(data_recorded.iat[1, counter]))
+            color_arrow = (255, 0, 0)  # Blue Arrow
+            thickness = 3  # In px
+
+            cv2.arrowedLine(img_color, start_point, end_point, color_arrow, thickness)
 
         elif data_recorded.iat[0, counter] + 20 >= data_live[0] >= \
                 data_recorded.iat[0, counter] - 20:
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)
+            cv2.putText(img_color, "GOOD POSTURE! :D", (50, 50),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
