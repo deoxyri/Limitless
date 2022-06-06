@@ -124,9 +124,6 @@ def show():
 
 
 button2 = tk.Button(root, text="Vamos!", command=show)
-
-label4 = tk.Label(root, text="Vamos!")
-label4.config(font=('helvetica', 10))
 canvas1.create_window(200, 250, window=button2)
 
 # EXTRACT EXERCISE NAME
@@ -135,3 +132,4 @@ ex_name = show()
 root.mainloop()
 # PRINT VALUES
 print(ex_name)
+
