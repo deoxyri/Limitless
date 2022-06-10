@@ -88,8 +88,6 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
     deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
 
-    # cv2.imshow('Image', img_color)
-
 
 def deviation_check_loop(img_color, counter, data_recorded, data_live):
     import cv2
@@ -101,8 +99,10 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
     if counter < data_size and data_live.size > 1:
         # print("Counter Value = ", counter)
 
-        if data_live[0] > data_recorded.iat[counter, 0] + 20 or \
-                data_live[0] < data_recorded.iat[counter, 0] - 20:
+        if (data_live[0] > data_recorded.iat[counter, 0] + 20 or
+            data_live[0] < data_recorded.iat[counter, 0] - 20) and \
+                (data_live[1] > data_recorded.iat[counter, 1] + 20 or
+                 data_live[1] < data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
@@ -116,8 +116,10 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
 
             # cv2.arrowedLine(img_color, start_point, end_point, color_arrow, thickness)
 
-        elif data_recorded.iat[counter, 0] + 20 >= data_live[0] >= \
-                data_recorded.iat[counter, 0] - 20:
+        elif (data_recorded.iat[counter, 0] + 20 >= data_live[0] >=
+              data_recorded.iat[counter, 0] - 20) and \
+                (data_recorded.iat[counter, 1] + 20 >= data_live[0] >=
+                 data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)
@@ -135,8 +137,10 @@ def deviation_check_loop_arrow(img_color, counter, data_recorded, data_live):
     if counter < data_size and data_live.size > 1:
         # print("Counter Value = ", counter)
 
-        if data_live[0] > data_recorded.iat[counter, 0] + 20 or \
-                data_live[0] < data_recorded.iat[counter, 0] - 20:
+        if (data_live[0] > data_recorded.iat[counter, 0] + 20 or
+            data_live[0] < data_recorded.iat[counter, 0] - 20) and \
+                (data_live[1] > data_recorded.iat[counter, 1] + 20 or
+                 data_live[1] < data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
@@ -150,8 +154,10 @@ def deviation_check_loop_arrow(img_color, counter, data_recorded, data_live):
 
             cv2.arrowedLine(img_color, start_point, end_point, color_arrow, thickness)
 
-        elif data_recorded.iat[counter, 0] + 20 >= data_live[0] >= \
-                data_recorded.iat[counter, 0] - 20:
+        elif (data_recorded.iat[counter, 0] + 20 >= data_live[0] >=
+              data_recorded.iat[counter, 0] - 20) and \
+                (data_recorded.iat[counter, 1] + 20 >= data_live[0] >=
+                 data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)

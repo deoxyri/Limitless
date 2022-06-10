@@ -41,14 +41,27 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
 # -----------------------------------------------------------------------------------
 # LOOP ALL TABLES TO BE CREATED IN DATABASE
 i = 0
+# while i < len(joints_description):
+#  create_table = """
+#   CREATE TABLE IF NOT EXISTS {}_data (
+#   id SERIAL PRIMARY KEY,
+#   x_location REAL,
+#  y_location REAL,
+# depth REAL
+# )
+# """.format(joints_description[i])
+# execute_query(connection, create_table)
+# i += 1
+
 while i < len(joints_description):
-    create_table = """
-     CREATE TABLE IF NOT EXISTS {}_data (
-     id SERIAL PRIMARY KEY,
-     x_location REAL,
-     y_location REAL,
-     depth REAL
-    )
-    """.format(joints_description[i])
-    execute_query(connection, create_table)
+    delete_query_1 = f"DROP TABLE {joints_description[i]}_data_chest_fly"
+    delete_query_2 = f"DROP TABLE {joints_description[i]}_data_machine_fly_chest"
+    delete_query_3 = f"DROP TABLE {joints_description[i]}_data_record_test"
+    delete_query_4 = f"DROP TABLE {joints_description[i]}_data_scaption_strengthening"
+
+    execute_query(connection, delete_query_1)
+    execute_query(connection, delete_query_2)
+    execute_query(connection, delete_query_3)
+    execute_query(connection, delete_query_4)
+
     i += 1
