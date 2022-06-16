@@ -252,7 +252,10 @@ while counter >= 0:
         # COMPARE LIVE DATA WITH RECORDED DATA (COLOUR) #
         draw_skeleton_test(img_color, var_joints_recorded_data, data_tracking, counter)
 
-        cv2.imshow('Image', img_color)
+        window_name = "Exercise"
+        cv2.namedWindow(window_name)
+        cv2.moveWindow(window_name, 700, 250)
+        cv2.imshow(window_name, img_color)
 
     counter += 1
 

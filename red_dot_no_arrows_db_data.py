@@ -63,30 +63,30 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     # RED DOT FUNCTION CALL
     deviation_check_loop(img_color, counter, data_recorded_head, data_live_head)
     deviation_check_loop(img_color, counter, data_recorded_neck, data_live_neck)
-    deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
-    deviation_check_loop(img_color, counter, data_recorded_waist, data_live_waist)
-    deviation_check_loop(img_color, counter, data_recorded_left_collar, data_live_left_collar)
+    # deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
+    # deviation_check_loop(img_color, counter, data_recorded_waist, data_live_waist)
+    # deviation_check_loop(img_color, counter, data_recorded_left_collar, data_live_left_collar)
     deviation_check_loop(img_color, counter, data_recorded_left_shoulder, data_live_left_shoulder)
-    deviation_check_loop(img_color, counter, data_recorded_left_elbow, data_live_left_elbow)
-    deviation_check_loop(img_color, counter, data_recorded_left_wrist, data_live_left_wrist)
+    # deviation_check_loop(img_color, counter, data_recorded_left_elbow, data_live_left_elbow)
+    # deviation_check_loop(img_color, counter, data_recorded_left_wrist, data_live_left_wrist)
     # ------------------------------------------------------------------------------------------------------------------
     # ARROW MODIFICATION
     deviation_check_loop_arrow(img_color, counter, data_recorded_left_hand, data_live_left_hand)
     # ------------------------------------------------------------------------------------------------------------------
-    deviation_check_loop(img_color, counter, data_recorded_right_collar, data_live_right_collar)
+    # deviation_check_loop(img_color, counter, data_recorded_right_collar, data_live_right_collar)
     deviation_check_loop(img_color, counter, data_recorded_right_shoulder, data_live_right_shoulder)
-    deviation_check_loop(img_color, counter, data_recorded_right_elbow, data_live_right_elbow)
-    deviation_check_loop(img_color, counter, data_recorded_right_wrist, data_live_right_wrist)
+    # deviation_check_loop(img_color, counter, data_recorded_right_elbow, data_live_right_elbow)
+    # deviation_check_loop(img_color, counter, data_recorded_right_wrist, data_live_right_wrist)
     # ------------------------------------------------------------------------------------------------------------------
     # ARROW MODIFICATION
     deviation_check_loop_arrow(img_color, counter, data_recorded_right_hand, data_live_right_hand)
     # ------------------------------------------------------------------------------------------------------------------
-    deviation_check_loop(img_color, counter, data_recorded_left_hip, data_live_left_hip)
-    deviation_check_loop(img_color, counter, data_recorded_left_knee, data_live_left_knee)
-    deviation_check_loop(img_color, counter, data_recorded_left_ankle, data_live_left_ankle)
-    deviation_check_loop(img_color, counter, data_recorded_right_hip, data_live_right_hip)
-    deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
-    deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
+    # deviation_check_loop(img_color, counter, data_recorded_left_hip, data_live_left_hip)
+    # deviation_check_loop(img_color, counter, data_recorded_left_knee, data_live_left_knee)
+    # deviation_check_loop(img_color, counter, data_recorded_left_ankle, data_live_left_ankle)
+    # deviation_check_loop(img_color, counter, data_recorded_right_hip, data_live_right_hip)
+    # deviation_check_loop(img_color, counter, data_recorded_right_knee, data_live_right_knee)
+    # deviation_check_loop(img_color, counter, data_recorded_right_ankle, data_live_right_ankle)
 
 
 def deviation_check_loop(img_color, counter, data_recorded, data_live):
@@ -100,14 +100,14 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
         # print("Counter Value = ", counter)
 
         if (data_live[0] > data_recorded.iat[counter, 0] + 20 or
-            data_live[0] < data_recorded.iat[counter, 0] - 20) and \
-                (data_live[1] > data_recorded.iat[counter, 1] + 20 or
-                 data_live[1] < data_recorded.iat[counter, 1] - 20):
+            data_live[0] < data_recorded.iat[counter, 0] - 20):  # and \
+                # (data_live[1] > data_recorded.iat[counter, 1] + 20 or
+                 # data_live[1] < data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color_2, thickness=3, lineType=8, shift=0)
-            cv2.putText(img_color, "PLEASE CORRECT YOUR POSTURE", (50, 50),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
+            # cv2.putText(img_color, "PLEASE CORRECT YOUR POSTURE", (50, 50),
+              #          cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
             # DRAW ARROW
             start_point = x  # Live Data Point
             end_point = (round(data_recorded.iat[counter, 0]), round(data_recorded.iat[counter, 1]))
@@ -117,14 +117,14 @@ def deviation_check_loop(img_color, counter, data_recorded, data_live):
             # cv2.arrowedLine(img_color, start_point, end_point, color_arrow, thickness)
 
         elif (data_recorded.iat[counter, 0] + 20 >= data_live[0] >=
-              data_recorded.iat[counter, 0] - 20) and \
-                (data_recorded.iat[counter, 1] + 20 >= data_live[0] >=
-                 data_recorded.iat[counter, 1] - 20):
+              data_recorded.iat[counter, 0] - 20):  # and \
+                # (data_recorded.iat[counter, 1] + 20 >= data_live[0] >=
+                 # data_recorded.iat[counter, 1] - 20):
 
             x = (round(data_live[0]), round(data_live[1]))
             cv2.circle(img_color, x, 6, point_color, thickness=3, lineType=8, shift=0)
-            cv2.putText(img_color, "GOOD POSTURE! :D", (50, 50),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
+            # cv2.putText(img_color, "GOOD POSTURE! :D", (50, 50),
+              #          cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2)
 
 
 def deviation_check_loop_arrow(img_color, counter, data_recorded, data_live):
@@ -138,7 +138,7 @@ def deviation_check_loop_arrow(img_color, counter, data_recorded, data_live):
         # print("Counter Value = ", counter)
 
         if (data_live[0] > data_recorded.iat[counter, 0] + 20 or
-            data_live[0] < data_recorded.iat[counter, 0] - 20) and \
+            data_live[0] < data_recorded.iat[counter, 0] - 20)  and \
                 (data_live[1] > data_recorded.iat[counter, 1] + 20 or
                  data_live[1] < data_recorded.iat[counter, 1] - 20):
 
@@ -155,7 +155,7 @@ def deviation_check_loop_arrow(img_color, counter, data_recorded, data_live):
             cv2.arrowedLine(img_color, start_point, end_point, color_arrow, thickness)
 
         elif (data_recorded.iat[counter, 0] + 20 >= data_live[0] >=
-              data_recorded.iat[counter, 0] - 20) and \
+              data_recorded.iat[counter, 0] - 20)  and \
                 (data_recorded.iat[counter, 1] + 20 >= data_live[0] >=
                  data_recorded.iat[counter, 1] - 20):
 

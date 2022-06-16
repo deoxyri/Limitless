@@ -200,14 +200,12 @@ while 1:
     if img_color.size:
         draw_skeleton(img_color, data)
 
-        # SIZING AND WRITING CODE
-        # writer.write(frame)
-        # cv2.imshow('Video', frame)
-        # SHOW STREAM
-
         writer.write(img_color)
-        cv2.imshow('Video', img_color)
-        # cv2.imshow('Image', img_color)
+
+        window_name = "Exercise Recording"
+        cv2.namedWindow(window_name)
+        cv2.moveWindow(window_name, 700, 250)
+        cv2.imshow(window_name, img_color)
 
         # LOOP FOR WRITING DATA
 
