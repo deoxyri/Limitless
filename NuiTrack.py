@@ -1,8 +1,8 @@
-from PyNuitrack import py_nuitrack
-import cv2
 from itertools import cycle
+
+import cv2
 import numpy as np
-import pyrealsense2 as rs
+from PyNuitrack import py_nuitrack
 
 
 def draw_face(image):
@@ -41,8 +41,8 @@ nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
 
 # ---enable if you want to use face tracking---
-#nuitrack.set_config_value("Faces.ToUse", "true")
-#nuitrack.set_config_value("DepthProvider.Depth2ColorRegistration", "true")
+nuitrack.set_config_value("Faces.ToUse", "true")
+nuitrack.set_config_value("DepthProvider.Depth2ColorRegistration", "true")
 
 devices = nuitrack.get_device_list()
 for i, dev in enumerate(devices):
@@ -66,21 +66,23 @@ while 1:
     data = nuitrack.get_skeleton()
     data_instance = nuitrack.get_instance()
     img_depth = nuitrack.get_depth_data()
-    if img_depth.size:
-        cv2.normalize(img_depth, img_depth, 0, 255, cv2.NORM_MINMAX)
-        img_depth = np.array(cv2.cvtColor(img_depth, cv2.COLOR_GRAY2RGB), dtype=np.uint8)
-        img_color = nuitrack.get_color_data()
+    img_color = nuitrack.get_color_data()
+    #if img_depth.size:
+    if img_color.size:
+        # cv2.normalize(img_depth, img_depth, 0, 255, cv2.NORM_MINMAX)
+        # img_depth = np.array(cv2.cvtColor(img_depth, cv2.COLOR_GRAY2RGB), dtype=np.uint8)
+        # img_color = nuitrack.get_color_data()
         draw_skeleton(img_depth)
         draw_skeleton(img_color)
         draw_face(img_depth)
         draw_face(img_color)
-        if key == 32:
-            mode = next(modes)
-        if mode == "depth":
-            cv2.imshow('Image', img_depth)
-        if mode == "color":
-            if img_color.size:
-                cv2.imshow('Image', img_color)
+        #if key == 32:
+         #   mode = next(modes)
+        #if mode == "depth":
+        #    cv2.imshow('Image', img_depth)
+        #if mode == "color":
+            #if img_color.size:
+        cv2.imshow('Image', img_color)
     if key == 27:
         break
 
