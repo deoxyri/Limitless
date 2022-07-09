@@ -2,6 +2,7 @@
 import psycopg2
 from psycopg2 import OperationalError
 from psycopg2.extensions import register_adapter, AsIs
+# import pyrealsense2 as rs
 # ----------------------------------------------------------------------------------------------------------------------
 import numpy as np
 from PyNuitrack import py_nuitrack
@@ -19,7 +20,7 @@ import tkinter as tk
 
 root = tk.Tk()
 # ROOT GEOMETRY
-root.geometry("+800+300")  # Position on Screen
+root.geometry("+450+150")  # Position on Screen (LAPTOP SCREEN - 450,150)
 canvas1 = tk.Canvas(root, width=400, height=300, relief='raised')
 canvas1.pack()
 
@@ -184,7 +185,7 @@ codec = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 video_name = ex_name
 
 # VIDEO WRITER
-writer = cv2.VideoWriter(f"X:\Limitless\A - Skeletal Tracking\Tracking Programs\Exercise Videos\{video_name}.mp4",
+writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
                          codec, fps, (width, height))
 
 # LOOP
@@ -204,7 +205,7 @@ while 1:
 
         window_name = "Exercise Recording"
         cv2.namedWindow(window_name)
-        cv2.moveWindow(window_name, 700, 250)
+        cv2.moveWindow(window_name, 350, 50)  # FOR LAPTOP SCREEN
         cv2.imshow(window_name, img_color)
 
         # LOOP FOR WRITING DATA

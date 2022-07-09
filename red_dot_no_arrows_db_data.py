@@ -63,24 +63,24 @@ def draw_skeleton_test(img_color, var_joints_recorded_data, var_joints_live_data
     # RED DOT FUNCTION CALL
     deviation_check_loop(img_color, counter, data_recorded_head, data_live_head)
     deviation_check_loop(img_color, counter, data_recorded_neck, data_live_neck)
-    # deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
-    # deviation_check_loop(img_color, counter, data_recorded_waist, data_live_waist)
+    deviation_check_loop(img_color, counter, data_recorded_torso, data_live_torso)
+    deviation_check_loop(img_color, counter, data_recorded_waist, data_live_waist)
     # deviation_check_loop(img_color, counter, data_recorded_left_collar, data_live_left_collar)
-    deviation_check_loop(img_color, counter, data_recorded_left_shoulder, data_live_left_shoulder)
-    # deviation_check_loop(img_color, counter, data_recorded_left_elbow, data_live_left_elbow)
+    # deviation_check_loop(img_color, counter, data_recorded_left_shoulder, data_live_left_shoulder)
+    # deviation_check_loop_arrow(img_color, counter, data_recorded_left_elbow, data_live_left_elbow)
     # deviation_check_loop(img_color, counter, data_recorded_left_wrist, data_live_left_wrist)
     # ------------------------------------------------------------------------------------------------------------------
     # ARROW MODIFICATION
     deviation_check_loop_arrow(img_color, counter, data_recorded_left_hand, data_live_left_hand)
     # ------------------------------------------------------------------------------------------------------------------
     # deviation_check_loop(img_color, counter, data_recorded_right_collar, data_live_right_collar)
-    deviation_check_loop(img_color, counter, data_recorded_right_shoulder, data_live_right_shoulder)
-    # deviation_check_loop(img_color, counter, data_recorded_right_elbow, data_live_right_elbow)
+    # deviation_check_loop(img_color, counter, data_recorded_right_shoulder, data_live_right_shoulder)
+    # deviation_check_loop_arrow(img_color, counter, data_recorded_right_elbow, data_live_right_elbow)
     # deviation_check_loop(img_color, counter, data_recorded_right_wrist, data_live_right_wrist)
     # ------------------------------------------------------------------------------------------------------------------
     # ARROW MODIFICATION
     deviation_check_loop_arrow(img_color, counter, data_recorded_right_hand, data_live_right_hand)
-    # ------------------------------------------------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------------------------------------------
     # deviation_check_loop(img_color, counter, data_recorded_left_hip, data_live_left_hip)
     # deviation_check_loop(img_color, counter, data_recorded_left_knee, data_live_left_knee)
     # deviation_check_loop(img_color, counter, data_recorded_left_ankle, data_live_left_ankle)
