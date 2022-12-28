@@ -1,6 +1,7 @@
 # ----------------------------------------------------------------------------------------------------------------------
 # KIVY - GUI
 from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -14,13 +15,13 @@ from kivy.base import runTouchApp
 class ImiKami(App):
     def build(self):
         self.window = GridLayout()
-        self.window.rows = 5
+        # self.window.rows = 6
         self.window.cols = 1
         # self.window.size_hint = (0.6, 0.7)
         self.window.pos_hint = {"centre_x": 0.5, "centre_y": 0.5}
         # --------------------------------------------------------------------------------------------------------------
         #LAYOUT
-        layout = FloatLayout()
+        # layout = FloatLayout()
         # add widgets to window
         # --------------------------------------------------------------------------------------------------------------
         # Image Widget
@@ -29,6 +30,7 @@ class ImiKami(App):
         # Label Widget
         self.greeting = Label(text="Welcome to the Training Session",
                               font_size=18,
+                              font_name = 'Times.ttf',
                               color='#00FFCE'
                               )
         self.window.add_widget(self.greeting)
@@ -41,15 +43,32 @@ class ImiKami(App):
         self.window.add_widget(self.user)
         # --------------------------------------------------------------------------------------------------------------
         # Button Widget
-
-        self.button = Button(text="Confirm",
-                             size_hint=(1, 0.5),
+        # layout_buttons = BoxLayout(orientation = "vertical")
+        self.button1 = Button(text="Confirm",
+                              font_name='Times.ttf',
+                             size_hint=(0.5, 1),
                              bold=True,
-                             background_color='#00FFCE',
-                             background_normal=""
+                             background_color='#AF88DF',
+                             background_normal="",
+                            center= (1,1)
                              )
-        self.button.bind(on_press=self.callback)
-        self.window.add_widget(self.button)
+        self.button1.bind(on_press=self.callback)
+
+        self.button2 = Button(text="Exit",
+                              font_name='Times.ttf',
+                             size_hint=(0.5, 1),
+                             bold=True,
+                             background_color='#AF88DF',
+                             background_normal="",
+                              center=(5, 1)
+                             )
+        self.button2.bind(on_press=self.callback)
+
+        # layout_buttons.add_widget(self.button1)
+        # layout_buttons.add_widget(self.button2)
+
+        self.window.add_widget(self.button1)
+        self.window.add_widget(self.button2)
         # --------------------------------------------------------------------------------------------------------------
         #DROP DOWN MENU
         drop_down = DropDown()
@@ -79,8 +98,8 @@ class ImiKami(App):
         # runtouchApp:
         # If we pass only the widget in runtouchApp(), the Window will be
         # created and our widget will be added to that window as the root widget.
-        # self.window.add_widget(main_button)
-        runTouchApp(main_button)
+        self.window.add_widget(main_button)
+        # runTouchApp(main_button)
         # --------------------------------------------------------------------------------------------------------------
         return self.window
         # --------------------------------------------------------------------------------------------------------------
