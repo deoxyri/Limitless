@@ -2,25 +2,24 @@ from google.cloud.sql.connector import Connector, IPTypes
 import sqlalchemy
 import os
 
-# from google.colab import auth
-# auth.authenticate_user()
-
-credential_path = "X:\Limitless\A - Skeletal Tracking\Tracking Programs\service_key_gcloud.json"
+credential_path = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
+# initialize connector
+connector = Connector()
 
 # Python Connector database creator function
 def getconn():
-    with Connector() as connector:
         conn = connector.connect(
             "applied-craft-372501:australia-southeast2:imikami-demo-v1", # Cloud SQL Instance Connection Name
             "pg8000",
-            user="root",
+            user="postgres",
             password="Limitless@96",
             db="postgres",
+            enable_iam_auth=True,
             ip_type=IPTypes.PUBLIC # IPTypes.PRIVATE for private IP
         )
-    return conn
+        return conn
 
 # create SQLAlchemy connection pool
 pool = sqlalchemy.create_engine(
@@ -28,13 +27,12 @@ pool = sqlalchemy.create_engine(
     creator=getconn,
 )
 
-getconn()
+# connect to connection pool
+with pool.connect() as db_conn:
+    # get current datetime from database
+    results = db_conn.execute("SELECT NOW()").fetchone()
 
-# interact with Cloud SQL database using connection pool
-# with pool.connect() as db_conn:
-#     # query database
-#     result = db_conn.execute("SELECT * from my_table").fetchall()
-#
-#     # Do something with the results
-#     for row in result:
-#         print(row)
+    # output time
+    print("Current time: ", results[0])
+
+connector.close()

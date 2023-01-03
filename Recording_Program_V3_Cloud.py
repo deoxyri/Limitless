@@ -1,8 +1,6 @@
 # DATABASE
-import psycopg2
-from psycopg2 import OperationalError
-from psycopg2.extensions import register_adapter, AsIs
-from google.cloud.sql.connector import Connector
+from google.cloud.sql.connector import Connector, IPTypes
+import os
 import sqlalchemy
 # ----------------------------------------------------------------------------------------------------------------------
 import numpy as np
@@ -68,64 +66,7 @@ root.mainloop()  # TO RUN THE TKINTER LOOP
 
 ex_name = ex_num.replace(' ', '_')
 print(ex_name)
-# ----------------------------------------------------------------------------------------------------------------------
-# CREATE CONNECTION
-def create_connection(db_name, db_user, db_password, db_host, db_port):
-    connection = None
-    try:
-        connection = psycopg2.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            port=db_port,
-        )
-        print("Connection to PostgreSQL DB successful")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-    return connection
 
-
-# ADAPTING DIFFERENT DATA TYPES TO DATABASE
-def addapt_numpy_float64(numpy_float64):
-    return AsIs(numpy_float64)
-
-
-def addapt_numpy_float32(numpy_float32):
-    return AsIs(numpy_float32)
-
-
-def addapt_numpy_int64(numpy_int64):
-    return AsIs(numpy_int64)
-
-
-# FUNCTION TO EXECUTE QUERIES
-def execute_query(connection, query):
-    connection.autocommit = True
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Query executed successfully")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-
-
-# READING DATABASE DATA
-def execute_read_query(connection, query):
-    cursor = connection.cursor()
-    result = None
-    try:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        return result
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-
-
-# REGISTERING np datatypes for DATABASE
-register_adapter(np.float64, addapt_numpy_float64)
-register_adapter(np.int64, addapt_numpy_int64)
-register_adapter(np.float32, addapt_numpy_float32)
 # ----------------------------------------------------------------------------------------------------------------------
 # JOINTS KEY HOLDER
 var_holder = {}
@@ -240,21 +181,6 @@ writer.release()
 cv2.destroyAllWindows()
 # ----------------------------------------------------------------------------------------------------------------------
 # ENTERING VALUES INTO THE DATABASE
-connection = create_connection("limitless_v1", "postgres", "Limitless@96", "127.0.0.1", "5432")
-
-# LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
-i = 0
-while i < len(joints_description):
-    create_table = f"""
-     CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
-     id SERIAL PRIMARY KEY,
-     x_location REAL,
-     y_location REAL,
-     depth REAL
-    )
-    """
-    execute_query(connection, create_table)
-    i += 1
 
 # TRANSPOSING DATA FRAME FOR TUPLE TO BE 1X3 TO INSERT INTO COLUMNS
 j = 0
@@ -265,23 +191,63 @@ while j < len(var_joint_data_holder):
     # CONVERTING TO TUPLE
     joint_data = [tuple(x) for x in var_joint_data_holder['data_' + joints_description[j] + '_df'].to_numpy()]
     joint_data_records = ", ".join(["%s"] * len(joint_data))
+# ----------------------------------------------------------------------------------------------------------------------
+# CREATE CONNECTION
+# ----------------------------------------------------------------------------------------------------------------------
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
 
-    # print(joint_data)
+INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
+print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+DB_USER = "postgres"
+DB_PASS = "Limitless@96"
+DB_NAME = "postgres"
 
-    # DELETE DATA QUERY - TRIAL ON SINGLE DATABASE FOR 1 EXERCISE - SO NEED TO REFRESH DATA EVERYTIME
-    # FOR MULTIPLE EXERCISES WILL REQUIRE MULTIPLE DATABASES OR TABLES (WEIGH THE PROs AND CONs)
-    delete_query = f"DELETE FROM {joints_description[j]}_data_{ex_name}"  # WHERE {joints_description[j]}_data.id IS NOT NULL "
-    connection.autocommit = True
-    cursor = connection.cursor()
-    cursor.execute(delete_query)
+# initialize Connector object
+connector = Connector()
 
-    # INSERTING DATA INTO THE DATABASE
 
-    insert_query = f"INSERT INTO {joints_description[j]}_data_{ex_name} " \
-                   f"(x_location, y_location, depth) VALUES {joint_data_records}"
+# function to return the database connection object
+def getconn():
+    conn = connector.connect(
+        INSTANCE_CONNECTION_NAME,
+        "pg8000",
+        user=DB_USER,
+        password=DB_PASS,
+        db=DB_NAME,
+        enable_iam_auth=True
+    )
+    return conn
+# ----------------------------------------------------------------------------------------------------------------------
+# WRITING DATA INTO DATABASE
+# ----------------------------------------------------------------------------------------------------------------------
+# create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "postgresql+pg8000://",
+    creator=getconn,
+)
+# ----------------------------------------------------------------------------------------------------------------------
+# connect to connection pool
+with pool.connect() as db_conn:
+  # LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
+  i = 0
+  while i < len(joints_description):
+   db_conn.execute(
+       f"""
+           CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
+           id SERIAL PRIMARY KEY,
+           x_location REAL,
+           y_location REAL,
+           depth REAL
+          )
+          """
+   )
+   # insert data into our ratings table
+   insert_stmt = sqlalchemy.text(
+      f"""INSERT INTO {joints_description[i]}_data_{ex_name} 
+      (x_location, y_location, depth) 
+      VALUES {joint_data_records}""",
+   )
+   i += 1
 
-    connection.autocommit = True
-    cursor = connection.cursor()
-    cursor.execute(insert_query, joint_data)
 
-    j += 1
+connector.close()
