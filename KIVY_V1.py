@@ -1,5 +1,5 @@
-# ----------------------------------------------------------------------------------------------------------------------
 # KIVY - GUI
+# ----------------------------------------------------------------------------------------------------------------------
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
@@ -10,72 +10,123 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
+from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.app import App, Builder
+from kivy.core.window import Window
+# ----------------------------------------------------------------------------------------------------------------------
+# DATABASE
+from google.cloud.sql.connector import Connector, IPTypes
+import os
+import sqlalchemy
+
+# ----------------------------------------------------------------------------------------------------------------------
+# DATABASE CONNECTION FUNCTION
+# ----------------------------------------------------------------------------------------------------------------------
+# CREATE CONNECTION
+# ----------------------------------------------------------------------------------------------------------------------
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+
+INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
+print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+DB_USER = "postgres"
+DB_PASS = "Limitless@96"
+DB_NAME = "postgres"
+
+# initialize Connector object
+connector = Connector()
+
+
+# function to return the database connection object
+def getconn():
+    conn = connector.connect(
+        INSTANCE_CONNECTION_NAME,
+        "pg8000",
+        user=DB_USER,
+        password=DB_PASS,
+        db=DB_NAME,
+        enable_iam_auth=True
+    )
+    return conn
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# WRITING DATA INTO DATABASE
+# ----------------------------------------------------------------------------------------------------------------------
+# create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "postgresql+pg8000://",
+    creator=getconn,
+)
+# ----------------------------------------------------------------------------------------------------------------------
+table_name_query = """SELECT table_name
+FROM information_schema.tables
+WHERE table_type='BASE TABLE'
+AND table_schema='public'"""
+
+# connect to connection pool
+with pool.connect() as db_conn:
+    table_names = db_conn.execute(table_name_query).fetchall()
+
+# EXTRACTING UNIQUE EXERCISE NAMES FROM DATA TABLES
+table_names.sort()
+drop_down_data = (table_names[0:len(table_names) // 20])
+exercises = []
+print(exercises)
+
+for strings in drop_down_data:
+    strings = list(strings)
+    strings = ' '.join([str(elem) for elem in strings])
+
+    exercise_name = strings.replace("head_data_", "")
+    exercise_name = exercise_name.replace("head_data", "SELECT FROM BELOW")
+    exercise_name = exercise_name.replace("_", " ")
+    exercises.append(exercise_name)
+
+# CAPITALISING FIRST LETTER - FOR A BETTER UI/UX
+exercises = [x.title() for x in exercises]
+print(exercises)
+# ----------------------------------------------------------------------------------------------------------------------
+# WHITE BACKGROUND
+Window.clearcolor = (1, 1, 1, 1)
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # APP - CLASS SETUP
 class ImiKami(App):
     def build(self):
-        self.window = GridLayout()
-        # self.window.rows = 6
+        self.window = GridLayout(orientation='tb-lr')
         self.window.cols = 1
-        # self.window.size_hint = (0.6, 0.7)
+        self.window.size_hint = (1, 1)
         self.window.pos_hint = {"centre_x": 0.5, "centre_y": 0.5}
         # --------------------------------------------------------------------------------------------------------------
-        #LAYOUT
+        # LAYOUT
         # layout = FloatLayout()
         # add widgets to window
         # --------------------------------------------------------------------------------------------------------------
         # Image Widget
-        self.window.add_widget(Image(source="kinect.png"))
+        self.window.add_widget(Image(source="Logo Sample 3.png"))
         # --------------------------------------------------------------------------------------------------------------
         # Label Widget
         self.greeting = Label(text="Welcome to the Training Session",
-                              font_size=18,
-                              font_name = 'Times.ttf',
-                              color='#00FFCE'
+                              font_size=24,
+                              font_name='Times.ttf',
+                              color='#00000',
+                              pos_hint={"center_x": 0.5, "center_y": 0.5}
                               )
         self.window.add_widget(self.greeting)
         # --------------------------------------------------------------------------------------------------------------
         # User Input Text
-        self.user = TextInput(multiline=False,
-                              padding_y=(20, 20),
-                              size_hint=(1, 1)
-                              )
-        self.window.add_widget(self.user)
+        # self.user = TextInput(multiline=False,
+        #                       padding_y=(20, 20),
+        #                       size_hint=(1, 1)
+        #                       )
+        # self.window.add_widget(self.user)
         # --------------------------------------------------------------------------------------------------------------
-        # Button Widget
-        # layout_buttons = BoxLayout(orientation = "vertical")
-        # self.window.cols = 2
-        self.button1 = Button(text="Confirm",
-                              font_name='Times.ttf',
-                             size_hint=(0.5, 1),
-                             bold=True,
-                             background_color='#AF88DF',
-                             background_normal="",
-                            center= (1,1)
-                             )
-        self.button1.bind(on_press=self.callback)
-
-        self.button2 = Button(text="Exit",
-                              font_name='Times.ttf',
-                             size_hint=(0.5, 1),
-                             bold=True,
-                             background_color='#AF88DF',
-                             background_normal="",
-                              center=(5, 1)
-                             )
-        self.button2.bind(on_press=self.callback)
-
-        # layout_buttons.add_widget(self.button1)
-        # layout_buttons.add_widget(self.button2)
-
-        self.window.add_widget(self.button1)
-        self.window.add_widget(self.button2)
-        # --------------------------------------------------------------------------------------------------------------
-        #DROP DOWN MENU
+        # DROP DOWN MENU
         drop_down = DropDown()
-        for index in range(15):
-            # now, Add the button in the drop down list
-            drop_button = Button(text='List % d' % index, size_hint_y=None, height=30)
+        for index in exercises:
+            # now, Add the button in the drop-down list
+            drop_button = Button(text='%s' % index, size_hint_y=None, height=30)
 
             # now we will bind the button for showing the text when it is selected
             drop_button.bind(on_release=lambda btton: drop_down.select(btton.text))
@@ -84,7 +135,7 @@ class ImiKami(App):
             drop_down.add_widget(drop_button)
 
             # now we will create the big main button
-        main_button = Button(text='MAIN', size_hint=(None, None), pos=(350, 300))
+        main_button = Button(text='MENU', pos_hint={"center_x": 0.5, "center_y": 0.5})
 
         # now, we will first show the drop_down menu when the main button will releases
         # we should note that all of the bind() function calls will pass the instance of the caller
@@ -102,10 +153,25 @@ class ImiKami(App):
         self.window.add_widget(main_button)
         # runTouchApp(main_button)
         # --------------------------------------------------------------------------------------------------------------
+        # Button Widget
+        # CONFIRM / EXIT BUTTONS
+        buttons = [["Confirm", "Exit"], ["Bye", "Hi"]]
+        for row in buttons:
+            h_layout = BoxLayout()
+            for label in row:
+                button = Button(
+                    text=label,
+                    pos_hint={"center_x": 0.5, "center_y": 0.5},
+                )
+                button.bind(on_press=self.callback)
+                h_layout.add_widget(button)
+            self.window.add_widget(h_layout)
+
         return self.window
         # --------------------------------------------------------------------------------------------------------------
+
     def callback(self, instance):
-        self.greeting.text = "You have selected: " + self.user.text
+        self.greeting.text = "You have selected:"
 
 # ----------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":

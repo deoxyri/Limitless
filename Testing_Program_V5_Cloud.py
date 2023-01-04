@@ -19,18 +19,16 @@ from red_dot_no_arrows_db_data import *  # RED DOT FOR ALL JOINTS WITH NO ARROWS
 # ----------------------------------------------------------------------------------------------------------------------
 # FUNCTION TEST
 from var_holder_return_function import *
-
-# ----------------------------------------------------------------------------------------------------------------------
-# DATABASE
-from google.cloud.sql.connector import Connector, IPTypes
-import os
-import sqlalchemy
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI LIBRARIES
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-
+# ----------------------------------------------------------------------------------------------------------------------
+# DATABASE
+from google.cloud.sql.connector import Connector, IPTypes
+import os
+import sqlalchemy
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
@@ -245,3 +243,5 @@ while counter >= 0:
         break
 
 nuitrack.release()
+connector.close()
+
