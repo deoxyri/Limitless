@@ -44,6 +44,7 @@ class ImiKami(App):
         # --------------------------------------------------------------------------------------------------------------
         # Button Widget
         # layout_buttons = BoxLayout(orientation = "vertical")
+        # self.window.cols = 2
         self.button1 = Button(text="Confirm",
                               font_name='Times.ttf',
                              size_hint=(0.5, 1),

@@ -7,14 +7,6 @@ from itertools import cycle
 import numpy as np
 import pandas as pd
 # ----------------------------------------------------------------------------------------------------------------------
-# KIVY - GUI
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.image import Image
-from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
-# ----------------------------------------------------------------------------------------------------------------------
 # APP PROGRAM
 # ----------------------------------------------------------------------------------------------------------------------
 # DRAWING POINTS PROGRAMS IMPORT
@@ -29,90 +21,69 @@ from red_dot_no_arrows_db_data import *  # RED DOT FOR ALL JOINTS WITH NO ARROWS
 from var_holder_return_function import *
 
 # ----------------------------------------------------------------------------------------------------------------------
-# DATABASE LIBRARIES
-import psycopg2
-from psycopg2 import OperationalError
-from psycopg2.extensions import register_adapter, AsIs
+# DATABASE
+from google.cloud.sql.connector import Connector, IPTypes
+import os
+import sqlalchemy
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI LIBRARIES
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
-def create_connection(db_name, db_user, db_password, db_host, db_port):
-    connection = None
-    try:
-        connection = psycopg2.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            port=db_port,
-        )
-        print("Connection to PostgreSQL DB successful")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-    return connection
 # ----------------------------------------------------------------------------------------------------------------------
-# CREATE DATABASE FUNCTION
-def create_database(connection, query):
-    connection.autocommit = True
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Query executed successfully")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-
-
-# create_database_query = "CREATE DATABASE Limitless_V1"
+# CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-# FUNCTION TO EXECUTE QUERIES
-def execute_query(connection, query):
-    connection.autocommit = True
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Query executed successfully")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+
+INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
+print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+DB_USER = "postgres"
+DB_PASS = "Limitless@96"
+DB_NAME = "postgres"
+
+# initialize Connector object
+connector = Connector()
+
+
+# function to return the database connection object
+def getconn():
+    conn = connector.connect(
+        INSTANCE_CONNECTION_NAME,
+        "pg8000",
+        user=DB_USER,
+        password=DB_PASS,
+        db=DB_NAME,
+        enable_iam_auth=True
+    )
+    return conn
+
+
 # ----------------------------------------------------------------------------------------------------------------------
-# ADAPTING DIFFERENT DATA TYPES TO DATABASE
-def addapt_numpy_float64(numpy_float64):
-    return AsIs(numpy_float64)
-
-
-def addapt_numpy_float32(numpy_float32):
-    return AsIs(numpy_float32)
-
-
-def addapt_numpy_int64(numpy_int64):
-    return AsIs(numpy_int64)
+# WRITING DATA INTO DATABASE
 # ----------------------------------------------------------------------------------------------------------------------
-# REGISTERING np datatypes TO DATABASE
-register_adapter(np.float64, addapt_numpy_float64)
-register_adapter(np.int64, addapt_numpy_int64)
-register_adapter(np.float32, addapt_numpy_float32)
-# ----------------------------------------------------------------------------------------------------------------------
-# CONNECTING TO DATABASE
-connection = create_connection("limitless_v1", "postgres", "Limitless@96", "127.0.0.1", "5432")
+# create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "postgresql+pg8000://",
+    creator=getconn,
+)
 # ----------------------------------------------------------------------------------------------------------------------
 table_name_query = """SELECT table_name
 FROM information_schema.tables
 WHERE table_type='BASE TABLE'
 AND table_schema='public'"""
 
-# EXTRACTING TABLE NAMES
-connection.autocommit = True
-cursor = connection.cursor()
-cursor.execute(table_name_query)
-table_names = cursor.fetchall()
+# connect to connection pool
+with pool.connect() as db_conn:
+    table_names = db_conn.execute(table_name_query).fetchall()
 
 # EXTRACTING UNIQUE EXERCISE NAMES FROM DATA TABLES
 table_names.sort()
 drop_down_data = (table_names[0:len(table_names) // 20])
 exercises = []
+print(exercises)
 
 for strings in drop_down_data:
     strings = list(strings)
@@ -168,6 +139,7 @@ def show():
 
     return ex_name
 
+
 # DESTROY GUI WINDOW AFTER EXIT CLICK
 def destroy_window():
     canvas1.destroy()
@@ -179,6 +151,7 @@ def destroy_window():
     canvas2.create_window(200, 200, window=label5)
 
     root.after(3000, lambda: root.destroy())
+
 
 # MISC BUTTONS
 # CONFIRM BUTTON
@@ -213,14 +186,11 @@ var_joints_recorded_data = {}
 # EXTRACTING VALUES FROM DATABASE BASED ON EXERCISE NAME
 i = 0
 while i < len(joints_description):
-
-    select_data_database_query = f"""SELECT x_location,y_location,depth FROM {joints_description[i]}_data_{ex_name}"""
-    # EXTRACTING TABLE NAMES
-    connection.autocommit = True
-    cursor = connection.cursor()
-    cursor.execute(select_data_database_query)
-    data_database_values = cursor.fetchall()
-    var_joints_recorded_data[joints_description[i] + '_df'] = data_database_values
+    with pool.connect() as db_conn:
+        select_data_database_query = f"""SELECT x_location,y_location,depth FROM {joints_description[i]}_data_{ex_name}"""
+        # EXTRACTING TABLE NAMES
+        data_database_values = db_conn.execute(select_data_database_query).fetchall()
+        var_joints_recorded_data[joints_description[i] + '_df'] = data_database_values
 
     i += 1
 # ----------------------------------------------------------------------------------------------------------------------
