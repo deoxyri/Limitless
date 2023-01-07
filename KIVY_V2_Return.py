@@ -200,4 +200,7 @@ class ImiKami(App):
 # method which will render our application
 if __name__ == "__main__":
     ImiKami().run()
+    # I = ImiKami.callback('A')
+    # print(I)
+
 # ----------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,11 @@
+<RoundedButton@Button>:
+    font_size: 20
+    background_color: 0, 0, 0, 0
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [55]  #---- This rounds the corners --- #

@@ -1,0 +1,44 @@
+<TestLabel@Label>:
+    font_size: 20
+    background_color: 1, 1, 1, 1
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        Line:    # --- adds a border --- #
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+<TestButton@Button>:
+    font_size: 20
+    background_color: 0, 0, 0, 0
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [55]  #---- This rounds the corners --- #
+
+<User>:
+    name: "user_screen"
+    GridLayout:
+        padding: 15, 15
+        cols: 1
+        TestButton:
+            text: "This is the button"
+            size_hint: 0.3, 0.3
+            color: 0, 0, 0, 1
+        TestLabel:
+            text: "This is the label"
+            size_hint: 0.2, 0.2
+        Button:
+            text: "This is the default button"
+            size_hint: 0.2, 0.2
+        Label:
+            text: "This is the default label"
+            size_hint: 0.3, 0.3
+
+<RootWidget>:
+    User
