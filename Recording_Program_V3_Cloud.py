@@ -42,6 +42,7 @@ def exercise_name():
     canvas1.create_window(200, 250, window=label3)
     return ex_num
 
+
 # DESTROY GUI WINDOW AFTER EXIT CLICK
 def destroy_window():
     canvas1.destroy()
@@ -53,6 +54,7 @@ def destroy_window():
     canvas2.create_window(200, 200, window=label5)
 
     root.after(3000, lambda: root.destroy())
+
 
 # LOG EXERCISE BUTTON
 button1 = tk.Button(text='Log Exercise', command=exercise_name)
@@ -117,7 +119,7 @@ modes = cycle(["depth", "color"])
 mode = next(modes)
 # ----------------------------------------------------------------------------------------------------------------------
 # VIDEO CAPTURE
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 
 # VIDEO CONFIGURATION
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -191,6 +193,10 @@ while j < len(var_joint_data_holder):
     # CONVERTING TO TUPLE
     joint_data = [tuple(x) for x in var_joint_data_holder['data_' + joints_description[j] + '_df'].to_numpy()]
     joint_data_records = ", ".join(["%s"] * len(joint_data))
+
+    print(joint_data)
+
+    j += 1
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
@@ -204,7 +210,6 @@ DB_NAME = "postgres"
 
 # initialize Connector object
 connector = Connector()
-
 
 # function to return the database connection object
 def getconn():
@@ -228,26 +233,25 @@ pool = sqlalchemy.create_engine(
 # ----------------------------------------------------------------------------------------------------------------------
 # connect to connection pool
 with pool.connect() as db_conn:
-  # LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
-  i = 0
-  while i < len(joints_description):
-   db_conn.execute(
-       f"""
-           CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
-           id SERIAL PRIMARY KEY,
-           x_location REAL,
-           y_location REAL,
-           depth REAL
-          )
-          """
-   )
-   # insert data into our ratings table
-   insert_stmt = sqlalchemy.text(
-      f"""INSERT INTO {joints_description[i]}_data_{ex_name} 
-      (x_location, y_location, depth) 
-      VALUES {joint_data_records}""",
-   )
-   i += 1
-
+    # LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
+    i = 0
+    while i < len(joints_description):
+        db_conn.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
+            id SERIAL PRIMARY KEY,
+            x_location REAL,
+            y_location REAL,
+            depth REAL
+           )
+           """
+        )
+        # insert data into our ratings table
+        insert_stmt = sqlalchemy.text(
+            f"""INSERT INTO {joints_description[i]}_data_{ex_name}
+            (x_location, y_location, depth)
+             VALUES {joint_data_records}""",
+        )
+        i += 1
 
 connector.close()

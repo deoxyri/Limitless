@@ -1,7 +1,7 @@
 # DATABASE
-import psycopg2
-from psycopg2 import OperationalError
-from psycopg2.extensions import register_adapter, AsIs
+from google.cloud.sql.connector import Connector, IPTypes
+import os
+import sqlalchemy
 # ----------------------------------------------------------------------------------------------------------------------
 import numpy as np
 from PyNuitrack import py_nuitrack
@@ -17,6 +17,7 @@ from SkeletonDetection import *
 # GUI - Tkinter
 import tkinter as tk
 
+# ----------------------------------------------------------------------------------------------------------------------
 root = tk.Tk()
 # ROOT GEOMETRY
 root.geometry("+800+300")  # Position on Screen
@@ -42,6 +43,7 @@ def exercise_name():
     canvas1.create_window(200, 250, window=label3)
     return ex_num
 
+
 # DESTROY GUI WINDOW AFTER EXIT CLICK
 def destroy_window():
     canvas1.destroy()
@@ -53,6 +55,7 @@ def destroy_window():
     canvas2.create_window(200, 200, window=label5)
 
     root.after(3000, lambda: root.destroy())
+
 
 # LOG EXERCISE BUTTON
 button1 = tk.Button(text='Log Exercise', command=exercise_name)
@@ -66,64 +69,7 @@ root.mainloop()  # TO RUN THE TKINTER LOOP
 
 ex_name = ex_num.replace(' ', '_')
 print(ex_name)
-# ----------------------------------------------------------------------------------------------------------------------
-# CREATE CONNECTION
-def create_connection(db_name, db_user, db_password, db_host, db_port):
-    connection = None
-    try:
-        connection = psycopg2.connect(
-            database=db_name,
-            user=db_user,
-            password=db_password,
-            host=db_host,
-            port=db_port,
-        )
-        print("Connection to PostgreSQL DB successful")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-    return connection
 
-
-# ADAPTING DIFFERENT DATA TYPES TO DATABASE
-def addapt_numpy_float64(numpy_float64):
-    return AsIs(numpy_float64)
-
-
-def addapt_numpy_float32(numpy_float32):
-    return AsIs(numpy_float32)
-
-
-def addapt_numpy_int64(numpy_int64):
-    return AsIs(numpy_int64)
-
-
-# FUNCTION TO EXECUTE QUERIES
-def execute_query(connection, query):
-    connection.autocommit = True
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Query executed successfully")
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-
-
-# READING DATABASE DATA
-def execute_read_query(connection, query):
-    cursor = connection.cursor()
-    result = None
-    try:
-        cursor.execute(query)
-        result = cursor.fetchall()
-        return result
-    except OperationalError as e:
-        print(f"The error '{e}' occurred")
-
-
-# REGISTERING np datatypes for DATABASE
-register_adapter(np.float64, addapt_numpy_float64)
-register_adapter(np.int64, addapt_numpy_int64)
-register_adapter(np.float32, addapt_numpy_float32)
 # ----------------------------------------------------------------------------------------------------------------------
 # JOINTS KEY HOLDER
 var_holder = {}
@@ -174,7 +120,7 @@ modes = cycle(["depth", "color"])
 mode = next(modes)
 # ----------------------------------------------------------------------------------------------------------------------
 # VIDEO CAPTURE
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
 
 # VIDEO CONFIGURATION
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -233,53 +179,90 @@ while 1:
         break
 
 # Release everything if job is finished
+nuitrack.release()
 cap.release()
 writer.release()
 cv2.destroyAllWindows()
 # ----------------------------------------------------------------------------------------------------------------------
-# ENTERING VALUES INTO THE DATABASE
-connection = create_connection("limitless_v1", "postgres", "Limitless@96", "127.0.0.1", "5432")
+# CREATE CONNECTION
+# ----------------------------------------------------------------------------------------------------------------------
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
 
-# LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
-i = 0
-while i < len(joints_description):
-    create_table = f"""
-     CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
-     id SERIAL PRIMARY KEY,
-     x_location REAL,
-     y_location REAL,
-     depth REAL
+INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
+print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+DB_USER = "postgres"
+DB_PASS = "Limitless@96"
+DB_NAME = "postgres"
+
+# initialize Connector object
+connector = Connector()
+
+
+# function to return the database connection object
+def getconn():
+    conn = connector.connect(
+        INSTANCE_CONNECTION_NAME,
+        "pg8000",
+        user=DB_USER,
+        password=DB_PASS,
+        db=DB_NAME,
+        enable_iam_auth=True
     )
-    """
-    execute_query(connection, create_table)
-    i += 1
+    return conn
 
-# TRANSPOSING DATA FRAME FOR TUPLE TO BE 1X3 TO INSERT INTO COLUMNS
-j = 0
-while j < len(var_joint_data_holder):
-    var_joint_data_holder['data_' + joints_description[j] + '_df'] = \
-        var_joint_data_holder['data_' + joints_description[j] + '_df'].transpose()
 
-    # CONVERTING TO TUPLE
-    joint_data = [tuple(x) for x in var_joint_data_holder['data_' + joints_description[j] + '_df'].to_numpy()]
-    joint_data_records = ", ".join(["%s"] * len(joint_data))
+# ----------------------------------------------------------------------------------------------------------------------
+# WRITING DATA INTO DATABASE
+# ----------------------------------------------------------------------------------------------------------------------
+# create connection pool with 'creator' argument to our connection object function
+pool = sqlalchemy.create_engine(
+    "postgresql+pg8000://",
+    creator=getconn,
+)
+# ----------------------------------------------------------------------------------------------------------------------
+# connect to connection pool
+with pool.connect() as db_conn:
+    # LOOP ALL TABLES TO BE CREATED IN DATABASE - IF TABLES NOT FOUND
+    i = 0
+    while i < len(joints_description):
+        db_conn.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
+            id SERIAL PRIMARY KEY,
+            x_location REAL,
+            y_location REAL,
+            depth REAL
+           )
+           """
+        )
+        # --------------------------------------------------------------------------------------------------------------
+        var_joint_data_holder['data_' + joints_description[i] + '_df'] = \
+            var_joint_data_holder['data_' + joints_description[i] + '_df'].transpose()
 
-    print(joint_data)
-
-    # DELETE DATA QUERY - TRIAL ON SINGLE DATABASE FOR 1 EXERCISE - SO NEED TO REFRESH DATA EVERYTIME
-    # FOR MULTIPLE EXERCISES WILL REQUIRE MULTIPLE DATABASES OR TABLES (WEIGH THE PROs AND CONs)
-    delete_query = f"DELETE FROM {joints_description[j]}_data_{ex_name}"  # WHERE {joints_description[j]}_data.id IS NOT NULL "
-    connection.autocommit = True
-    cursor = connection.cursor()
-    cursor.execute(delete_query)
-
-    # INSERTING DATA INTO THE DATABASE
-
-    insert_query = f"INSERT INTO {joints_description[j]}_data_{ex_name} " \
-                   f"(x_location, y_location, depth) VALUES {joint_data_records}"
-
-    connection.autocommit = True
-    cursor = connection.cursor()
-    cursor.execute(insert_query, joint_data)
-
-    j += 1
+        # CONVERTING TO TUPLE
+        joint_data = [tuple(x) for x in var_joint_data_holder['data_' + joints_description[i] + '_df'].to_numpy()]
+        print(joint_data)
+        print(len(joint_data))
+        print(len(joint_data[0]))
+        # --------------------------------------------------------------------------------------------------------------
+        # insert data into our ratings table
+        insert_stmt = sqlalchemy.text(
+            f"""INSERT INTO {joints_description[i]}_data_{ex_name}
+            (x_location, y_location, depth)
+             VALUES (:x_location, :y_location, :depth)""",
+        )
+        # DELETE QUERY
+        delete_query = f"DELETE FROM {joints_description[i]}_data_{ex_name}"
+        # --------------------------------------------------------------------------------------------------------------
+        # DELETE OLD DATA
+        db_conn.execute(delete_query)
+        # DATA INSERT LOOP - OVERWRITING
+        j = 0
+        while j < len(joint_data):
+            db_conn.execute(insert_stmt, x_location=joint_data[j][0],
+                            y_location=joint_data[j][1],
+                            depth=joint_data[j][2])
+            j += 1
+        # --------------------------------------------------------------------------------------------------------------
+        i += 1
+connector.close()

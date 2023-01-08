@@ -13,8 +13,10 @@ import sqlalchemy
 
 # ----------------------------------------------------------------------------------------------------------------------
 # AUTHENTICATION
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+
+os.environ["SQLALCHEMY_SILENCE_UBER_WARNING"] = "1"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
@@ -56,7 +58,7 @@ with pool.connect() as db_conn:
     )
     # insert data into our ratings table
     insert_stmt = sqlalchemy.text(
-        "INSERT INTO ratings (title, genre, rating) VALUES (:title, :genre, :rating)",
+        "INSERT INTO movies (title, genre, rating) VALUES (:title, :genre, :rating)",
     )
 
     # insert entries into table
