@@ -183,11 +183,10 @@ class ImiKami(App):
         return self.window
 
     def callback(self, instance):
-        if __name__ == '__main__':
-            self.greeting.text = "You have selected:" + self.main_button.text
-            ex_name = self.main_button.text
-            print(ex_name)
-            return self.main_button.text
+        self.greeting.text = "You have selected:" + self.main_button.text
+        ex_name = self.main_button.text
+        print(ex_name)
+        return ex_name
 
     def close_application(self, instance):
         # closing application
@@ -200,7 +199,6 @@ class ImiKami(App):
 # method which will render our application
 if __name__ == "__main__":
     ImiKami().run()
-    # I = ImiKami.callback('A')
-    # print(I)
-
+    I = ImiKami()
+    print(I)
 # ----------------------------------------------------------------------------------------------------------------------
