@@ -22,11 +22,21 @@ import os
 import sqlalchemy
 
 # ----------------------------------------------------------------------------------------------------------------------
+# # KIVY_DOC PATH
+# if 'KIVY_DOC' not in os.environ:
+#     if not Label:
+#         from kivy.logger import Logger
+#         import sys
+#
+#         Logger.critical('App: Unable to get a Text provider, abort.')
+#         sys.exit(1)
+# ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
