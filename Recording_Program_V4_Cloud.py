@@ -133,9 +133,10 @@ video_name = ex_name
 # writer = cv2.VideoWriter(f"X:\Limitless\A - Skeletal Tracking\Tracking Programs\Exercise Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
 # VIDEO WRITER
-writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
-                         codec, fps, (width, height))
-
+# writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
+#                          codec, fps, (width, height))
+writer = cv2.VideoWriter(f"C:\{video_name}.mp4",
+                          codec, fps, (width, height))
 # LOOP
 while 1:
     key = cv2.waitKey(1)
@@ -189,7 +190,9 @@ cv2.destroyAllWindows()
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
