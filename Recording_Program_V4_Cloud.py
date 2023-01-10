@@ -130,7 +130,10 @@ codec = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 video_name = ex_name
 
 # VIDEO WRITER
-writer = cv2.VideoWriter(f"X:\Limitless\A - Skeletal Tracking\Tracking Programs\Exercise Videos\{video_name}.mp4",
+# writer = cv2.VideoWriter(f"X:\Limitless\A - Skeletal Tracking\Tracking Programs\Exercise Videos\{video_name}.mp4",
+#                          codec, fps, (width, height))
+# VIDEO WRITER
+writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
                          codec, fps, (width, height))
 
 # LOOP
