@@ -20,23 +20,20 @@ from kivy.properties import StringProperty, ObjectProperty
 from google.cloud.sql.connector import Connector, IPTypes
 import os
 import sqlalchemy
-
 # ----------------------------------------------------------------------------------------------------------------------
-# # KIVY_DOC PATH
-# if 'KIVY_DOC' not in os.environ:
-#     if not Label:
-#         from kivy.logger import Logger
-#         import sys
-#
-#         Logger.critical('App: Unable to get a Text provider, abort.')
-#         sys.exit(1)
+# SETTING RECURSIVE LIMIT
+import sys
+
+sys.setrecursionlimit(10 ** 9)
+print(sys.getrecursionlimit())
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
@@ -44,7 +41,7 @@ DB_USER = "postgres"
 DB_PASS = "Limitless@96"
 DB_NAME = "postgres"
 
-# initialize Connector object
+# Initialize Connector Object
 connector = Connector()
 
 
@@ -83,7 +80,8 @@ with pool.connect() as db_conn:
 table_names.sort()
 drop_down_data = (table_names[0:len(table_names) // 20])
 exercises = []
-print(exercises)
+# print(exercises)
+print(drop_down_data)
 
 for strings in drop_down_data:
     strings = list(strings)
@@ -96,7 +94,7 @@ for strings in drop_down_data:
 
 # CAPITALISING FIRST LETTER - FOR A BETTER UI/UX
 exercises = [x.title() for x in exercises]
-print(exercises)
+# print(exercises)
 # ----------------------------------------------------------------------------------------------------------------------
 # WHITE BACKGROUND
 Window.clearcolor = (1, 1, 1, 1)
@@ -170,7 +168,6 @@ class ImiKami(App):
         # --------------------------------------------------------------------------------------------------------------
         # Button Widget
         # CONFIRM / EXIT BUTTONS
-        buttons = [["Confirm", "Exit"], ["Bye", "Hi"]]
         h_layout = BoxLayout()
 
         button_confirm = Button(
@@ -205,12 +202,12 @@ class ImiKami(App):
         # removing window
         Window.close()
 
+    # def go(self):
+    #     os.execlp(sys.executable, 'python', 'KIVY_V1.py')
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # method which will render our application
 if __name__ == "__main__":
     ImiKami().run()
-    I = ImiKami()
-    # print(I.callback())
-    # print(ex_name)
 # ----------------------------------------------------------------------------------------------------------------------
