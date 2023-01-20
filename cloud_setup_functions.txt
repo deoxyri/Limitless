@@ -1,0 +1,14 @@
+gcloud artifacts print-settings python --project="applied-craft-372501" --repository="imikami-demo" --location="australia-southeast2-a"
+
+gcloud artifacts print-settings python --project=applied-craft-372501 --repository=imikami-demo --location=australia-southeast2-a
+
+gcloud artifacts print-settings python [--project=applied-craft-372501] [--repository=imikami-demo] [--location=australia-southeast2-a]
+
+
+
+"X:\Limitless\A - Skeletal Tracking\Tracking Programs\service_key_gcloud.json"
+
+gcloud auth activate-service-account --key-file="X:\Limitless\A - Skeletal Tracking\Tracking Programs\service_key_gcloud.json"
+
+
+export GOOGLE_APPLICATION_CREDENTIALS="X:\Limitless\A - Skeletal Tracking\Tracking Programs\service_key_gcloud.json"
