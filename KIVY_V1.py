@@ -31,8 +31,8 @@ print(sys.getrecursionlimit())
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
@@ -210,10 +210,4 @@ class ImiKami(App):
 # method which will render our application
 if __name__ == "__main__":
     ImiKami().run()
-<<<<<<< HEAD
-    # I = ImiKami()
-    # print(I.callback())
-    # print(ex_name)
-=======
->>>>>>> 79116b743573a3efdc28e9eb5fd4e5845fc21a1c
 # ----------------------------------------------------------------------------------------------------------------------
