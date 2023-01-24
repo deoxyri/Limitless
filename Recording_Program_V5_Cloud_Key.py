@@ -140,7 +140,7 @@ video_name = ex_name
 # writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
 writer = cv2.VideoWriter(f"C:\{video_name}.mp4",
-                          codec, fps, (width, height))
+                         codec, fps, (width, height))
 # LOOP
 while 1:
     key = cv2.waitKey(1)
@@ -194,7 +194,11 @@ cv2.destroyAllWindows()
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+os.system("gcloud auth application-default login")
+os.environ[
+    "GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\PC-User\AppData\Roaming\gcloud\application_default_credentials.json"
+
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
 

@@ -29,12 +29,17 @@ from tkinter import ttk
 from google.cloud.sql.connector import Connector, IPTypes
 import os
 import sqlalchemy
+
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
+os.system("gcloud auth application-default login")
+os.environ[
+    "GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\PC-User\AppData\Roaming\gcloud\application_default_credentials.json"
+
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
 
@@ -246,4 +251,3 @@ while counter >= 0:
 
 nuitrack.release()
 connector.close()
-
