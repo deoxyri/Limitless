@@ -26,23 +26,17 @@ import sys
 
 sys.setrecursionlimit(10 ** 9)
 print(sys.getrecursionlimit())
+
+user = os.getlogin()
+print(user)
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
 os.system("gcloud auth application-default login")
-os.environ[
-    "GOOGLE_APPLICATION_CREDENTIALS"] = r"C:\Users\PC-User\AppData\Roaming\gcloud\application_default_credentials.json"
-
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "X:\Limitless\A - Skeletal Tracking\Keys\service_key_gcloud.json"
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "F:\Limitless\Programs\Keys\service_key_gcloud.json"
-# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service_key_gcloud.json"
-
-# credentials = google.oauth2.service_account.Credentials.from_service_account_file(
-#     './Peepl-cb1dac99bdc0.json',
-#     scopes=['https://www.googleapis.com/auth/cloud-platform'])
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
+    rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
 
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
