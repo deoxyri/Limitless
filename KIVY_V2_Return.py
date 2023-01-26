@@ -24,16 +24,16 @@ import sqlalchemy
 # SETTING RECURSIVE LIMIT
 import sys
 
-sys.setrecursionlimit(10 ** 9)
+# sys.setrecursionlimit(10 ** 9)
 print(sys.getrecursionlimit())
-
-user = os.getlogin()
-print(user)
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
 # CREATE CONNECTION
 # ----------------------------------------------------------------------------------------------------------------------
+user = os.getlogin()
+print(user)
+
 os.system("gcloud auth application-default login")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
