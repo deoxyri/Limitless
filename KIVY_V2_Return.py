@@ -29,15 +29,25 @@ print(sys.getrecursionlimit())
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
-# CREATE CONNECTION
-# ----------------------------------------------------------------------------------------------------------------------
+# GETTING USERNAME
 user = os.getlogin()
 print(user)
+# ----------------------------------------------------------------------------------------------------------------------
+# CHECKING PLATFORM OF THE SYSTEM
+from sys import platform
+print(platform)
 
-os.system("gcloud auth application-default login")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
+if platform == "linux" or platform == "linux2":
+    exit()
+elif platform == "darwin":
+    exit()
+elif platform == "win32":
+ os.system("gcloud auth application-default login")
+ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
-
+# ----------------------------------------------------------------------------------------------------------------------
+# CREATE CONNECTION
+# ----------------------------------------------------------------------------------------------------------------------
 INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
 print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 DB_USER = "postgres"

@@ -1,0 +1,5 @@
+pyinstaller KIVY_V2_Return.py -w
+
+pyinstaller Recording_Program_V5_Cloud_Key.py -w
+
+pyinstaller Testing_Program_V6_Cloud_Key.py -w
