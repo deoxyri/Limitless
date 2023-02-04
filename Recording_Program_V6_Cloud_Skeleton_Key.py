@@ -14,6 +14,8 @@ from operator import attrgetter
 # DRAWING POINTS
 # from FaceDetection import *
 from SkeletonDetection import *
+import nuitrack
+
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI - Tkinter
 import tkinter as tk
@@ -110,7 +112,7 @@ cwd = os.getcwd()
 print(cwd)
 
 nuitrack = py_nuitrack.Nuitrack()
-nuitrack.init(r"./nuitrack/data/nuitrack.config")
+# nuitrack.init(r"./nuitrack/data/nuitrack.config")
 # nuitrack.init()
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE AND PRINT DEVICE
