@@ -200,7 +200,6 @@ while i < len(joints_description):
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()
-
 # nuitrack.init(r"./nuitrack/data/nuitrack.config")
 nuitrack.init()
 
