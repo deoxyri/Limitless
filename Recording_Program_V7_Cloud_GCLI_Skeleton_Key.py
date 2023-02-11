@@ -110,7 +110,15 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
 # INITIALISE NUITRACK
 cwd = os.getcwd()
 print(cwd)
+# ----------------------------------------------------------------------------------------------------------------------
+# SETTING NUITRACK PATHS
+nuitrack_path = r"F:\Limitless\Programs\nuitrack"
+bin_path = nuitrack_path + r"\bin"
+data_path = nuitrack_path + r"\data"
+middleware_path = nuitrack_path + r"\middleware"
 
+os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+# ----------------------------------------------------------------------------------------------------------------------
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
 # ----------------------------------------------------------------------------------------------------------------------

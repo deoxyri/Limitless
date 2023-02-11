@@ -226,6 +226,14 @@ while i < len(joints_description):
 
     i += 1
 # ----------------------------------------------------------------------------------------------------------------------
+# SETTING NUITRACK PATHS
+nuitrack_path = r"F:\Limitless\Programs\nuitrack"
+bin_path = nuitrack_path + r"\bin"
+data_path = nuitrack_path + r"\data"
+middleware_path = nuitrack_path + r"\middleware"
+
+os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+# ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
