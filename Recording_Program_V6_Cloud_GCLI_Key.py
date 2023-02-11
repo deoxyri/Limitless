@@ -112,9 +112,7 @@ cwd = os.getcwd()
 print(cwd)
 
 nuitrack = py_nuitrack.Nuitrack()
-# nuitrack.init(r"./nuitrack/data/nuitrack.config")
-nuitrack.init(r"C:\Program Files\Nuitrack\nuitrack\nuitrack\data\nuitrack.config")
-# nuitrack.init()
+nuitrack.init()
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE AND PRINT DEVICE
 devices = nuitrack.get_device_list()
@@ -206,8 +204,36 @@ cv2.destroyAllWindows()
 # ----------------------------------------------------------------------------------------------------------------------
 user = os.getlogin()
 print(user)
+# ----------------------------------------------------------------------------------------------------------------------
+# CHECKING GCLOUD INSTALLATION
+import subprocess
+import shutil
 
-os.system("gcloud auth application-default login")
+gcloud_path = rf"C:\Users\{user}\AppData\Roaming\gcloud"
+os.environ["PATH"] = gcloud_path + ";" + os.environ["PATH"]
+
+
+def check_gcloud_installed():
+    return shutil.which("gcloud") is not None
+
+
+def install_gcloud():
+    subprocess.run(["cmd", "/c", "install_gcloud.bat"])
+
+
+def authenticate_gcloud():
+    # subprocess.run(["gcloud", "auth", "application-default", "login"], check=True)
+    os.system("gcloud auth application-default login --no browser")
+
+
+if check_gcloud_installed():
+    authenticate_gcloud()
+    print("Successfully authenticated with Google Cloud Platform.")
+else:
+    print("Installing gcloud CLI...")
+    install_gcloud()
+    print("gcloud CLI installed.")
+# ----------------------------------------------------------------------------------------------------------------------
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
 
