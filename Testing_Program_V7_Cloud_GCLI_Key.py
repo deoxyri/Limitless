@@ -201,7 +201,8 @@ while i < len(joints_description):
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()
 # nuitrack.init(r"./nuitrack/data/nuitrack.config")
-nuitrack.init()
+nuitrack.init(r"C:\Program Files\Nuitrack\nuitrack\nuitrack\data\nuitrack.config")
+# nuitrack.init()
 
 devices = nuitrack.get_device_list()
 

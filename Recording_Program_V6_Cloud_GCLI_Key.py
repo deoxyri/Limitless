@@ -113,7 +113,8 @@ print(cwd)
 
 nuitrack = py_nuitrack.Nuitrack()
 # nuitrack.init(r"./nuitrack/data/nuitrack.config")
-nuitrack.init()
+nuitrack.init(r"C:\Program Files\Nuitrack\nuitrack\nuitrack\data\nuitrack.config")
+# nuitrack.init()
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE AND PRINT DEVICE
 devices = nuitrack.get_device_list()
