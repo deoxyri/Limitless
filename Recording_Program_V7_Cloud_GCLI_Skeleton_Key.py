@@ -15,7 +15,7 @@ from operator import attrgetter
 # from FaceDetection import *
 from SkeletonDetection import *
 import nuitrack
-
+import pathlib
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI - Tkinter
 import tkinter as tk
@@ -112,7 +112,10 @@ cwd = os.getcwd()
 print(cwd)
 # ----------------------------------------------------------------------------------------------------------------------
 # SETTING NUITRACK PATHS
-nuitrack_path = r"F:\Limitless\Programs\nuitrack"
+current_path = pathlib.Path(__file__).parent.resolve()
+print(current_path)
+
+nuitrack_path = rf"{current_path}\nuitrack"
 bin_path = nuitrack_path + r"\bin"
 data_path = nuitrack_path + r"\data"
 middleware_path = nuitrack_path + r"\middleware"
