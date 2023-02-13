@@ -1,27 +1,39 @@
-# DATABASE
-# ----------------------------------------------------------------------------------------------------------------------
-from google.cloud.sql.connector import Connector, IPTypes
+# RECORDING PROGRAM START #
+# GENERAL LIBRARIES
 import os
-import sqlalchemy
+import pathlib
 # ----------------------------------------------------------------------------------------------------------------------
-import numpy as np
-from PyNuitrack import py_nuitrack
+# DATABASE
+from google.cloud.sql.connector import Connector, IPTypes
+import sqlalchemy
 import cv2
 from itertools import cycle
+# ----------------------------------------------------------------------------------------------------------------------
 # OTHER LIBRARIES
 from data_write_program import *
 from operator import attrgetter
+# ----------------------------------------------------------------------------------------------------------------------
 # DRAWING POINTS
 # from FaceDetection import *
 from SkeletonDetection import *
-import nuitrack
-import pathlib
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI - Tkinter
 import tkinter as tk
+
 # ----------------------------------------------------------------------------------------------------------------------
-# KEYRING
-import keyring
+# SETTING NUITRACK PATHS
+current_path = pathlib.Path(__file__).parent.resolve()
+print(current_path)
+
+nuitrack_path = rf"{current_path}\nuitrack"
+bin_path = nuitrack_path + r"\bin"
+data_path = nuitrack_path + r"\data"
+middleware_path = nuitrack_path + r"\middleware"
+
+os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+# ----------------------------------------------------------------------------------------------------------------------
+# py_nuitrack IMPORT
+from PyNuitrack import py_nuitrack
 
 # ----------------------------------------------------------------------------------------------------------------------
 root = tk.Tk()
@@ -111,17 +123,6 @@ joints_description = ['head', 'neck', 'torso', 'waist', 'left_collar', 'left_sho
 cwd = os.getcwd()
 print(cwd)
 # ----------------------------------------------------------------------------------------------------------------------
-# SETTING NUITRACK PATHS
-current_path = pathlib.Path(__file__).parent.resolve()
-print(current_path)
-
-nuitrack_path = rf"{current_path}\nuitrack"
-bin_path = nuitrack_path + r"\bin"
-data_path = nuitrack_path + r"\data"
-middleware_path = nuitrack_path + r"\middleware"
-
-os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
-# ----------------------------------------------------------------------------------------------------------------------
 nuitrack = py_nuitrack.Nuitrack()
 nuitrack.init()
 # ----------------------------------------------------------------------------------------------------------------------
@@ -151,14 +152,14 @@ height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = cap.get(cv2.CAP_PROP_FPS)
 codec = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 video_name = ex_name
-
-# VIDEO WRITER
+# ----------------------------------------------------------------------------------------------------------------------
+# VIDEO WRITER PROGRAM
 # writer = cv2.VideoWriter(f"X:\Limitless\A - Skeletal Tracking\Tracking Programs\Exercise Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
 # VIDEO WRITER
 # writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
-writer = cv2.VideoWriter(f"C:\{video_name}.mp4",
+writer = cv2.VideoWriter(rf"C:\{video_name}.mp4",
                          codec, fps, (width, height))
 # LOOP
 while 1:
@@ -259,7 +260,7 @@ connector = Connector()
 
 
 # function to return the database connection object
-def getconn():
+def get_connection():
     conn = connector.connect(
         INSTANCE_CONNECTION_NAME,
         "pg8000",
@@ -277,7 +278,7 @@ def getconn():
 # create connection pool with 'creator' argument to our connection object function
 pool = sqlalchemy.create_engine(
     "postgresql+pg8000://",
-    creator=getconn,
+    creator=get_connection,
 )
 # ----------------------------------------------------------------------------------------------------------------------
 # connect to connection pool

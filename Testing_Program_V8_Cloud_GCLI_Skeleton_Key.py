@@ -1,14 +1,22 @@
-# SKELETON TRACKING LIBRARY
-from PyNuitrack import py_nuitrack
-# ----------------------------------------------------------------------------------------------------------------------
+# TESTING PROGRAM START #
 # GENERAL LIBRARIES
+import os
+import pathlib
 import cv2
 from itertools import cycle
-import numpy as np
-import pandas as pd
-import pathlib
 # ----------------------------------------------------------------------------------------------------------------------
-# APP PROGRAM
+# CHECKING GCLOUD INSTALLATION
+import subprocess
+import shutil
+# ----------------------------------------------------------------------------------------------------------------------
+# DATABASE
+from google.cloud.sql.connector import Connector, IPTypes
+import sqlalchemy
+# ----------------------------------------------------------------------------------------------------------------------
+# GUI LIBRARIES
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
 # ----------------------------------------------------------------------------------------------------------------------
 # DRAWING POINTS PROGRAMS IMPORT
 # from SkeletonDetection_Test import *
@@ -21,16 +29,19 @@ from red_dot_no_arrows_db_data import *  # RED DOT FOR ALL JOINTS WITH NO ARROWS
 # FUNCTION TEST
 from var_holder_return_function import *
 # ----------------------------------------------------------------------------------------------------------------------
-# GUI LIBRARIES
-import tkinter as tk
-from tkinter import *
-from tkinter import ttk
-# ----------------------------------------------------------------------------------------------------------------------
-# DATABASE
-from google.cloud.sql.connector import Connector, IPTypes
-import os
-import sqlalchemy
+# SETTING NUITRACK PATHS
+current_path = pathlib.Path(__file__).parent.resolve()
+print(current_path)
 
+nuitrack_path = rf"{current_path}\nuitrack"
+bin_path = nuitrack_path + r"\bin"
+data_path = nuitrack_path + r"\data"
+middleware_path = nuitrack_path + r"\middleware"
+
+os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+# ----------------------------------------------------------------------------------------------------------------------
+# SKELETON TRACKING LIBRARY
+from PyNuitrack import py_nuitrack
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
@@ -40,9 +51,6 @@ user = os.getlogin()
 print(user)
 # ----------------------------------------------------------------------------------------------------------------------
 # CHECKING GCLOUD INSTALLATION
-import subprocess
-import shutil
-
 gcloud_path = rf"C:\Users\{user}\AppData\Roaming\gcloud"
 os.environ["PATH"] = gcloud_path + ";" + os.environ["PATH"]
 
@@ -82,7 +90,7 @@ connector = Connector()
 
 
 # function to return the database connection object
-def getconn():
+def get_connection():
     conn = connector.connect(
         INSTANCE_CONNECTION_NAME,
         "pg8000",
@@ -100,7 +108,7 @@ def getconn():
 # create connection pool with 'creator' argument to our connection object function
 pool = sqlalchemy.create_engine(
     "postgresql+pg8000://",
-    creator=getconn,
+    creator=get_connection,
 )
 # ----------------------------------------------------------------------------------------------------------------------
 table_name_query = """SELECT table_name
@@ -220,23 +228,13 @@ var_joints_recorded_data = {}
 i = 0
 while i < len(joints_description):
     with pool.connect() as db_conn:
-        select_data_database_query = f"""SELECT x_location,y_location,depth FROM {joints_description[i]}_data_{ex_name}"""
+        select_data_database_query = f"""SELECT x_location,y_location,depth 
+                                     FROM {joints_description[i]}_data_{ex_name}"""
         # EXTRACTING TABLE NAMES
         data_database_values = db_conn.execute(select_data_database_query).fetchall()
         var_joints_recorded_data[joints_description[i] + '_df'] = data_database_values
 
     i += 1
-# ----------------------------------------------------------------------------------------------------------------------
-# SETTING NUITRACK PATHS
-current_path = pathlib.Path(__file__).parent.resolve()
-print(current_path)
-
-nuitrack_path = rf"{current_path}\nuitrack"
-bin_path = nuitrack_path + r"\bin"
-data_path = nuitrack_path + r"\data"
-middleware_path = nuitrack_path + r"\middleware"
-
-os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
 # ----------------------------------------------------------------------------------------------------------------------
 # INITIALISE DEVICE
 nuitrack = py_nuitrack.Nuitrack()

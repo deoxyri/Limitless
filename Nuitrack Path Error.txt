@@ -1,0 +1,13 @@
+
+NUITRACK ERROR:
+
+
+Traceback (most recent call last):
+  File "Testing_Program_V8_Cloud_GCLI_Skeleton_Key.py", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 352, in exec_module
+  File "PyNuitrack\__init__.py", line 3, in <module>
+  File "os.py", line 1117, in add_dll_directory
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Program Files\\Nuitrack\\nuitrack\\nuitrack/bin'
