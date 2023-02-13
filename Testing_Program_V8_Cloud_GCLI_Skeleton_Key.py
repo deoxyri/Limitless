@@ -28,12 +28,15 @@ from red_dot_no_arrows_db_data import *  # RED DOT FOR ALL JOINTS WITH NO ARROWS
 # ----------------------------------------------------------------------------------------------------------------------
 # FUNCTION TEST
 from var_holder_return_function import *
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SETTING NUITRACK PATHS
 current_path = pathlib.Path(__file__).parent.resolve()
 print(current_path)
 
 nuitrack_path = rf"{current_path}\nuitrack"
+print(nuitrack_path)
+
 bin_path = nuitrack_path + r"\bin"
 data_path = nuitrack_path + r"\data"
 middleware_path = nuitrack_path + r"\middleware"
@@ -42,6 +45,7 @@ os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathse
 # ----------------------------------------------------------------------------------------------------------------------
 # SKELETON TRACKING LIBRARY
 from PyNuitrack import py_nuitrack
+
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
 # ----------------------------------------------------------------------------------------------------------------------
