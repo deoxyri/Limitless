@@ -34,17 +34,23 @@ from var_holder_return_function import *
 current_path = pathlib.Path(__file__).parent.resolve()
 print(current_path)
 
-nuitrack_path = rf"{current_path}\nuitrack"
+nuitrack_path = rf"{current_path}\Nuitrack\nuitrack\nuitrack"
+
+os.environ['NUITRACK_HOME'] = nuitrack_path
 print(nuitrack_path)
 
 bin_path = nuitrack_path + r"\bin"
-data_path = nuitrack_path + r"\data"
-middleware_path = nuitrack_path + r"\middleware"
+current_env_path = os.environ['PATH']
+os.environ['PATH'] = bin_path + ';' + current_env_path
 
-os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+# data_path = nuitrack_path + r"\data"
+# middleware_path = nuitrack_path + r"\middleware"
+#
+# os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
 # ----------------------------------------------------------------------------------------------------------------------
 # SKELETON TRACKING LIBRARY
-from my_PyNuitrack import py_nuitrack
+# from my_PyNuitrack import py_nuitrack
+from PyNuitrack import py_nuitrack
 
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
