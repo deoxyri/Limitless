@@ -44,7 +44,7 @@ middleware_path = nuitrack_path + r"\middleware"
 os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
 # ----------------------------------------------------------------------------------------------------------------------
 # SKELETON TRACKING LIBRARY
-from PyNuitrack import py_nuitrack
+from my_PyNuitrack import py_nuitrack
 
 # ----------------------------------------------------------------------------------------------------------------------
 # DATABASE CONNECTION FUNCTION
