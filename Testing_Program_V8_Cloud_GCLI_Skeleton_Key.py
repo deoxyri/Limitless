@@ -37,11 +37,14 @@ print(current_path)
 nuitrack_path = rf"{current_path}\Nuitrack\nuitrack\nuitrack"
 
 os.environ['NUITRACK_HOME'] = nuitrack_path
+# Print out the value of the environment variable to verify that it was set correctly
+print(os.environ['NUITRACK_HOME'])
 print(nuitrack_path)
 
 bin_path = nuitrack_path + r"\bin"
 current_env_path = os.environ['PATH']
 os.environ['PATH'] = bin_path + ';' + current_env_path
+print(os.environ['PATH'])
 
 # data_path = nuitrack_path + r"\data"
 # middleware_path = nuitrack_path + r"\middleware"
