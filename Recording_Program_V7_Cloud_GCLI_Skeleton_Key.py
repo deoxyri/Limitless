@@ -19,21 +19,27 @@ from SkeletonDetection import *
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI - Tkinter
 import tkinter as tk
-
+# GCLOUD LIBRARIES
+import subprocess
+import shutil
 # ----------------------------------------------------------------------------------------------------------------------
 # SETTING NUITRACK PATHS
 current_path = pathlib.Path(__file__).parent.resolve()
 print(current_path)
 
-nuitrack_path = rf"{current_path}\nuitrack"
-bin_path = nuitrack_path + r"\bin"
-data_path = nuitrack_path + r"\data"
-middleware_path = nuitrack_path + r"\middleware"
+nuitrack_path = rf"{current_path}\Nuitrack\nuitrack\nuitrack"
 
-os.environ["PATH"] += os.pathsep + bin_path + os.pathsep + data_path + os.pathsep + middleware_path
+os.environ['NUITRACK_HOME'] = nuitrack_path
+print(os.environ['NUITRACK_HOME'])
+print(nuitrack_path)
+
+bin_path = nuitrack_path + r"\bin"
+current_env_path = os.environ['PATH']
+os.environ['PATH'] = bin_path + ';' + current_env_path
+print(os.environ['PATH'])
 # ----------------------------------------------------------------------------------------------------------------------
 # py_nuitrack IMPORT
-from my_PyNuitrack import py_nuitrack
+from PyNuitrack import py_nuitrack
 
 # ----------------------------------------------------------------------------------------------------------------------
 root = tk.Tk()
@@ -218,9 +224,6 @@ user = os.getlogin()
 print(user)
 # ----------------------------------------------------------------------------------------------------------------------
 # CHECKING GCLOUD INSTALLATION
-import subprocess
-import shutil
-
 gcloud_path = rf"C:\Users\{user}\AppData\Roaming\gcloud"
 os.environ["PATH"] = gcloud_path + ";" + os.environ["PATH"]
 
