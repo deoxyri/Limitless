@@ -38,7 +38,7 @@ import sqlalchemy
 user = os.getlogin()
 print(user)
 
-os.system("gcloud auth application-default login")
+os.system("gcloud auth application-default login --no browser")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
 
