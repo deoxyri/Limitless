@@ -14,7 +14,7 @@ from operator import attrgetter
 # DRAWING POINTS
 # from FaceDetection import *
 from SkeletonDetection import *
-import nuitrack
+# import nuitrack
 
 # ----------------------------------------------------------------------------------------------------------------------
 # GUI - Tkinter
@@ -147,7 +147,7 @@ video_name = ex_name
 # VIDEO WRITER
 # writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
-writer = cv2.VideoWriter(f"C:\{video_name}.mp4",
+writer = cv2.VideoWriter(rf"C:\{video_name}.mp4",
                          codec, fps, (width, height))
 # LOOP
 while 1:
