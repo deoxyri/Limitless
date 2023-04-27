@@ -277,7 +277,7 @@ with pool.connect() as db_conn:
     i = 0
     while i < len(joints_description):
         db_conn.execute(
-            f"""
+            rf"""
             CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
             id SERIAL PRIMARY KEY,
             x_location REAL,
@@ -298,12 +298,12 @@ with pool.connect() as db_conn:
         # --------------------------------------------------------------------------------------------------------------
         # insert data into our ratings table
         insert_stmt = sqlalchemy.text(
-            f"""INSERT INTO {joints_description[i]}_data_{ex_name}
+            rf"""INSERT INTO {joints_description[i]}_data_{ex_name}
             (x_location, y_location, depth)
              VALUES (:x_location, :y_location, :depth)""",
         )
         # DELETE QUERY
-        delete_query = f"DELETE FROM {joints_description[i]}_data_{ex_name}"
+        delete_query = rf"DELETE FROM {joints_description[i]}_data_{ex_name}"
         # --------------------------------------------------------------------------------------------------------------
         # DELETE OLD DATA
         db_conn.execute(delete_query)

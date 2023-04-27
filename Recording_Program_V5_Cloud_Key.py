@@ -139,8 +139,9 @@ video_name = ex_name
 # VIDEO WRITER
 # writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
-writer = cv2.VideoWriter(rf"C:\{video_name}.mp4",
-                         codec, fps, (width, height))
+# writer = cv2.VideoWriter(rf"C:\{video_name}.mp4", codec, fps, (width, height))
+
+writer = cv2.VideoWriter(rf"C:\Users\User\PycharmProjects\Videos\{video_name}.mp4", codec, fps, (width, height))
 # LOOP
 while 1:
     key = cv2.waitKey(1)
@@ -197,7 +198,7 @@ cv2.destroyAllWindows()
 user = os.getlogin()
 print(user)
 
-os.system("gcloud auth application-default login --no browser")
+os.system("gcloud auth application-default login")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
 
