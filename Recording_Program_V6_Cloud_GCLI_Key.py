@@ -147,8 +147,10 @@ video_name = ex_name
 # VIDEO WRITER
 # writer = cv2.VideoWriter(f"G:\Limitless\Videos\{video_name}.mp4",
 #                          codec, fps, (width, height))
-writer = cv2.VideoWriter(rf"C:\{video_name}.mp4",
-                         codec, fps, (width, height))
+#writer = cv2.VideoWriter(rf"C:\{video_name}.mp4",
+#                         codec, fps, (width, height))
+
+writer = cv2.VideoWriter(rf"C:\Users\User\PycharmProjects\Videos\{video_name}.mp4", codec, fps, (width, height))
 # LOOP
 while 1:
     key = cv2.waitKey(1)
