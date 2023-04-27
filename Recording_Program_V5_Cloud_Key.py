@@ -202,8 +202,8 @@ os.system("gcloud auth application-default login")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = \
     rf"C:\Users\{user}\AppData\Roaming\gcloud\application_default_credentials.json"
 
-INSTANCE_CONNECTION_NAME = f"applied-craft-372501:australia-southeast2:imikami-demo-v1"
-print(f"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
+INSTANCE_CONNECTION_NAME = rf"applied-craft-372501:australia-southeast2:imikami-demo-v1"
+print(rf"Your instance connection name is: {INSTANCE_CONNECTION_NAME}")
 DB_USER = "postgres"
 DB_PASS = "Limitless@96"
 DB_NAME = "postgres"
@@ -240,7 +240,7 @@ with pool.connect() as db_conn:
     i = 0
     while i < len(joints_description):
         db_conn.execute(
-            f"""
+            rf"""
             CREATE TABLE IF NOT EXISTS {joints_description[i]}_data_{ex_name} (
             id SERIAL PRIMARY KEY,
             x_location REAL,
@@ -261,12 +261,12 @@ with pool.connect() as db_conn:
         # --------------------------------------------------------------------------------------------------------------
         # insert data into our ratings table
         insert_stmt = sqlalchemy.text(
-            f"""INSERT INTO {joints_description[i]}_data_{ex_name}
+            rf"""INSERT INTO {joints_description[i]}_data_{ex_name}
             (x_location, y_location, depth)
              VALUES (:x_location, :y_location, :depth)""",
         )
         # DELETE QUERY
-        delete_query = f"DELETE FROM {joints_description[i]}_data_{ex_name}"
+        delete_query = rf"DELETE FROM {joints_description[i]}_data_{ex_name}"
         # --------------------------------------------------------------------------------------------------------------
         # DELETE OLD DATA
         db_conn.execute(delete_query)
